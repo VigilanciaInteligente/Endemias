@@ -4,131 +4,166 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b4d3c">
-<meta name="description" content="Aplicativo de apoio à vigilância em saúde e controle de endemias para municípios do estado de São Paulo: mapas de focos, casos, PEIE, controle de estoque, indicadores e registro de reclamações.">
+<meta name="description" content="Plataforma de inteligência territorial em vigilância em saúde para municípios do estado de São Paulo: prevenção ao Super El Niño, mapas de focos, casos, PEIE, controle de estoque e redução de custos com internações.">
 <link rel="icon" type="image/png" href="icone-180.png">
 <link rel="apple-touch-icon" href="icone-180.png">
-<title>Combate às Endemias – Inteligência Territorial em Vigilância em Saúde para Municípios de SP</title>
+<title>Combate às Endemias – Inteligência Territorial e Vigilância em Saúde</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#f6f7f2; --ink:#15231f; --muted:#4d5f58; --green:#0d5c48; --green-ink:#fff; --mint:#4fc19b; --line:#d3dcd5; --tint:#e6eee6; --focus:#e0a800; color-scheme:light; }
+  :root { 
+    --bg:#f8f9f5; 
+    --ink:#12201b; 
+    --muted:#4a5c54; 
+    --green:#0d5c48; 
+    --green-ink:#fff; 
+    --mint:#4fc19b; 
+    --line:#d0dad3; 
+    --tint:#e3eee8; 
+    --focus:#e0a800; 
+    --card-bg:#ffffff;
+    --shadow:0 14px 34px rgba(13,92,72,0.08);
+    color-scheme:light; 
+  }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#0f1916; --ink:#eef3ee; --muted:#a6b8b0; --green:#4fc19b; --green-ink:#07251c; --line:#2b3d37; --tint:#17262a; --focus:#f2c230; color-scheme:dark; }
+    :root { 
+      --bg:#0a1411; 
+      --ink:#ecf3ef; 
+      --muted:#a2b5ac; 
+      --green:#4fc19b; 
+      --green-ink:#061c15; 
+      --line:#263832; 
+      --tint:#14241f; 
+      --focus:#f2c230; 
+      --card-bg:#101f1a;
+      --shadow:0 14px 34px rgba(0,0,0,0.35);
+      color-scheme:dark; 
+    }
   }
   * { box-sizing:border-box; }
   html { -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:18px/1.55 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:18px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   a:focus-visible, summary:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
   img { max-width:100%; height:auto; display:block; }
-  .wrap { max-width:1020px; margin:0 auto; padding:0 22px; }
-  h1 { font-size:clamp(34px,6vw,54px); line-height:1.06; margin:0 0 18px; letter-spacing:-.015em; }
-  h2 { font-size:clamp(26px,4vw,34px); line-height:1.15; margin:0 0 14px; letter-spacing:-.01em; }
-  h3 { font-size:19px; margin:0 0 4px; }
-  p { margin:0 0 14px; }
+  .wrap { max-width:1060px; margin:0 auto; padding:0 24px; }
+  h1 { font-size:clamp(32px, 5.5vw, 52px); line-height:1.1; margin:0 0 20px; letter-spacing:-.02em; }
+  h2 { font-size:clamp(24px, 3.8vw, 36px); line-height:1.2; margin:0 0 14px; letter-spacing:-.01em; }
+  h3 { font-size:20px; margin:0 0 8px; }
+  p { margin:0 0 16px; }
   .muted { color:var(--muted); }
-  section { padding:72px 0 0; }
+  section { padding:84px 0 0; }
 
-  .hero { background:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.5px) 0 0/24px 24px, linear-gradient(160deg,#0a4636 0%,#0d5c48 55%,#137a60 100%); color:#fff; border-radius:0 0 32px 32px; padding:56px 0 64px; overflow:hidden; }
-  .hero > .wrap { display:grid; gap:40px; align-items:center; }
-  .topo { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:36px; }
-  .topo a { color:#d5ece3; text-decoration:none; font-weight:700; }
-  .marca { display:flex; align-items:center; gap:12px; color:#fff !important; }
-  .marca img { width:46px; height:46px; border-radius:12px; }
-  .topo nav { display:none; gap:26px; font-size:16px; }
-  @media (min-width:700px) { .topo nav { display:flex; } }
-  .hero-arte { order:-1; max-width:300px; margin:0 auto; }
-  .hero-arte img { width:100%; height:auto; filter:drop-shadow(0 22px 40px rgba(0,0,0,.3)); }
-  .passos3 { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:26px; counter-reset:n; }
-  .passo3 { counter-increment:n; background:var(--tint); border-radius:18px; padding:24px 22px; }
-  .passo3::before { content:counter(n); display:grid; place-items:center; width:38px; height:38px; border-radius:50%; background:var(--green); color:var(--green-ink); font-weight:700; margin-bottom:14px; }
-  .passo3 p { margin:0; color:var(--muted); font-size:16px; }
-  .sub { font-size:20px; line-height:1.5; color:#d5ece3; max-width:38ch; margin-bottom:28px; }
-  .botoes { display:flex; flex-wrap:wrap; gap:12px; }
-  .botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; font-weight:700; font-size:18px; padding:15px 26px; border-radius:14px; background:#fff; color:#0a4636; box-shadow:0 10px 24px rgba(0,0,0,.25); transition:transform .15s; }
-  .botao:hover { transform:translateY(-2px); }
-  .botao.alt { background:#4fc19b; }
-  .botao.verde { background:var(--green); color:var(--green-ink); box-shadow:none; }
-  .botao svg { width:22px; height:22px; }
+  /* Hero Section */
+  .hero { background:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1.5px) 0 0/24px 24px, linear-gradient(155deg,#07362a 0%,#0d5c48 55%,#116e55 100%); color:#fff; border-radius:0 0 36px 36px; padding:48px 0 72px; overflow:hidden; }
+  .hero > .wrap { display:grid; gap:48px; align-items:center; }
+  .topo { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.15); margin-bottom:24px; }
+  .topo a { color:#d5ece3; text-decoration:none; font-weight:700; transition:color .2s; }
+  .topo a:hover { color:#fff; }
+  .marca { display:flex; align-items:center; gap:12px; color:#fff !important; font-size:19px; letter-spacing:-.01em; }
+  .marca img { width:44px; height:44px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+  .topo nav { display:none; gap:28px; font-size:16px; }
+  @media (min-width:768px) { .topo nav { display:flex; } }
+  .hero-arte { order:-1; max-width:320px; margin:0 auto; }
+  .hero-arte img { width:100%; height:auto; filter:drop-shadow(0 24px 40px rgba(0,0,0,.35)); }
+  .sub { font-size:19px; line-height:1.55; color:#d5ece3; max-width:40ch; margin-bottom:32px; }
+  
+  /* Botões profissionais e limpos sem sobreposição */
+  .botoes { display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+  .botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; font-weight:700; font-size:17px; padding:15px 28px; border-radius:14px; background:#fff; color:#0a4636; box-shadow:0 8px 22px rgba(0,0,0,.2); transition:all .2s ease; border:2px solid transparent; }
+  .botao:hover { transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.28); background:#fdfdfd; }
+  .botao.alt { background:rgba(255,255,255,0.12); color:#fff; border-color:rgba(255,255,255,0.3); backdrop-filter:blur(6px); }
+  .botao.alt:hover { background:rgba(255,255,255,0.22); color:#fff; }
+  .botao.verde { background:var(--green); color:var(--green-ink); box-shadow:0 8px 24px rgba(13,92,72,0.3); }
+  .botao.verde:hover { background:#0a4838; color:#fff; }
+  .botao svg { width:20px; height:20px; flex-shrink:0; }
   [hidden] { display:none !important; }
 
-  .fone { width:100%; max-width:290px; margin:0 auto; border:9px solid #0b1f19; border-radius:34px; overflow:hidden; background:#0b1f19; box-shadow:0 28px 55px rgba(0,0,0,.35); }
-  .fone.larga { max-width:380px; border-radius:24px; }
-  .hero .fone { transform:rotate(3deg); }
+  /* Cards e Grid */
+  .passos3 { display:grid; gap:24px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:32px; counter-reset:n; }
+  .passo3 { counter-increment:n; background:var(--card-bg); border:1px solid var(--line); border-radius:20px; padding:28px 26px; box-shadow:var(--shadow); }
+  .passo3::before { content:counter(n); display:grid; place-items:center; width:42px; height:42px; border-radius:12px; background:var(--tint); color:var(--green); font-weight:700; font-size:18px; margin-bottom:16px; border:1px solid var(--line); }
+  .passo3 h3 { margin-bottom:8px; }
+  .passo3 p { margin:0; color:var(--muted); font-size:16px; }
 
-  .numeros { display:grid; gap:28px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin:30px 0 26px; }
-  .numero b { display:block; font-size:clamp(38px,6vw,52px); line-height:1; color:var(--green); letter-spacing:-.02em; }
-  .numero span { display:block; margin-top:8px; color:var(--muted); font-size:16px; line-height:1.4; }
-  .nota { background:var(--tint); border-left:5px solid var(--green); border-radius:0 14px 14px 0; padding:16px 20px; max-width:720px; }
-  .nota p { margin:0; }
-  .fonte { font-size:14px; color:var(--muted); margin-top:16px; max-width:720px; }
+  /* Estatísticas & Alerta El Niño */
+  .numeros { display:grid; gap:24px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin:32px 0 28px; }
+  .numero { background:var(--card-bg); border:1px solid var(--line); border-radius:18px; padding:24px; box-shadow:var(--shadow); }
+  .numero b { display:block; font-size:clamp(36px,5vw,46px); line-height:1.1; color:var(--green); letter-spacing:-.02em; margin-bottom:6px; }
+  .numero span { display:block; color:var(--muted); font-size:16px; line-height:1.45; }
+  
+  .nota-alerta { background:var(--tint); border:1px solid var(--line); border-left:6px solid #d97706; border-radius:0 18px 18px 0; padding:22px 26px; margin:28px 0; box-shadow:var(--shadow); }
+  .nota-alerta h3 { color:#b45309; display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:20px; }
+  .nota-alerta p { margin:0; color:var(--ink); font-size:17px; line-height:1.6; }
 
-  .recurso { display:grid; gap:32px; align-items:center; padding:36px 0; border-top:1px solid var(--line); }
-  .recurso:first-of-type { margin-top:20px; }
-  .recurso ul { margin:0; padding-left:20px; color:var(--muted); }
-  .recurso li { margin-bottom:6px; }
-  .recurso .tag { display:inline-block; font-size:14px; font-weight:700; color:var(--green); background:var(--tint); border-radius:999px; padding:3px 12px; margin-bottom:12px; }
-  @media (min-width:820px) {
+  .nota { background:var(--card-bg); border:1px solid var(--line); border-left:6px solid var(--green); border-radius:0 18px 18px 0; padding:22px 26px; margin:28px 0; box-shadow:var(--shadow); }
+  .nota p { margin:0; font-size:17px; line-height:1.6; }
+  .fonte { font-size:14px; color:var(--muted); margin-top:16px; }
+
+  /* Seções de Recursos */
+  .recurso { display:grid; gap:40px; align-items:center; padding:48px 0; border-top:1px solid var(--line); }
+  .recurso:first-of-type { margin-top:24px; }
+  .recurso ul { margin:16px 0 0; padding-left:20px; color:var(--muted); }
+  .recurso li { margin-bottom:8px; font-size:17px; }
+  .recurso .tag { display:inline-block; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--green); background:var(--tint); border:1px solid var(--line); border-radius:999px; padding:4px 14px; margin-bottom:14px; }
+  @media (min-width:860px) {
     .hero > .wrap { grid-template-columns:1fr 1fr; }
     .hero-arte { order:0; max-width:480px; }
-    .recurso { grid-template-columns:1fr 1fr; gap:64px; }
-    .recurso.inv .fone { order:-1; }
+    .recurso { grid-template-columns:1.1fr 0.9fr; gap:64px; }
+    .recurso.inv .fone-col { order:-1; }
   }
 
-  .ganhos { display:grid; gap:28px 36px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
-  .ganhos p { color:var(--muted); font-size:16px; margin:0; }
+  /* Ganhos do Município */
+  .ganhos-grid { display:grid; gap:24px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); margin-top:32px; }
+  .ganho-card { background:var(--card-bg); border:1px solid var(--line); border-radius:18px; padding:26px; box-shadow:var(--shadow); }
+  .ganho-card h3 { margin-bottom:10px; color:var(--green); font-size:19px; }
+  .ganho-card p { color:var(--muted); font-size:16px; margin:0; }
 
-  /* Destaques sobre as telas - Aprimorados (maiores, brilhantes e com setas) */
-  .vitrine { position:relative; width:100%; max-width:340px; margin:0 auto; }
-  .vitrine .fone { max-width:none; position:relative; overflow:visible; }
-  .vitrine .fone img { border-radius:25px; }
-  .vitrine .fone.larga img { border-radius:15px; }
+  /* Vitrine de Telas e Destaques (Limpos e Sem Sobreposição) */
+  .vitrine { position:relative; width:100%; max-width:320px; margin:0 auto; padding:20px 0; }
+  .fone { width:100%; border:10px solid #0b1f19; border-radius:36px; overflow:hidden; background:#0b1f19; box-shadow:0 28px 55px rgba(0,0,0,.35); position:relative; }
+  .fone.larga { max-width:370px; border-radius:26px; }
+  .fone img { border-radius:24px; display:block; width:100%; }
+
+  /* Marcadores (mk) posicionados com precisão milimétrica sem invadir textos vizinhos */
+  .mk { position:absolute; left:var(--l); top:var(--t); width:var(--w); height:var(--h); border:3px solid #ffd24a; border-radius:10px; pointer-events:none;
+        box-shadow:0 0 0 4px rgba(255,210,74,0.25), 0 0 20px 6px rgba(255,210,74,0.6); z-index:5; }
+  .mk-label { position:absolute; background:#ffd24a; color:#2c1e00; font-size:12px; font-weight:700; padding:4px 9px; border-radius:6px; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,0.3); z-index:8; }
   
-  .mk { position:absolute; left:var(--l); top:var(--t); width:var(--w); height:var(--h); border:4px solid #ffd24a; border-radius:var(--r,12px); pointer-events:none;
-        box-shadow:0 0 0 6px rgba(255,210,74,.32), 0 0 32px 10px rgba(255,210,74,.85), inset 0 0 18px rgba(255,210,74,.45); animation:pulso 2s ease-in-out infinite; z-index:10; }
-  .mk b { position:absolute; left:8px; bottom:100%; margin-bottom:12px; background:#ffd24a; color:#2c1e00; font-size:14px; line-height:1.3; font-weight:700; padding:6px 12px; border-radius:10px; white-space:nowrap; box-shadow:0 6px 16px rgba(0,0,0,.45); }
-  .mk b::after { content:""; position:absolute; left:18px; top:100%; border:8px solid transparent; border-top-color:#ffd24a; }
-  .mk.abx b { bottom:auto; top:100%; margin:12px 0 0; }
-  .mk.abx b::after { top:auto; bottom:100%; border-top-color:transparent; border-bottom-color:#ffd24a; }
-  .mk.dir b { left:auto; right:8px; }
-  .mk.dir b::after { left:auto; right:18px; }
-
-  .lupa { position:absolute; right:-6%; bottom:4%; width:48%; aspect-ratio:1; border-radius:50%; border:5px solid #ffd24a; background-repeat:no-repeat; background-color:#fff;
+  /* Lupa de Zoom Profissional */
+  .lupa { position:absolute; right:-4%; bottom:6%; width:44%; aspect-ratio:1; border-radius:50%; border:4px solid #ffd24a; background-repeat:no-repeat; background-color:#fff;
           background-image:var(--img); background-size:calc(var(--k)*100%) auto; background-position:var(--px) var(--py);
-          box-shadow:0 0 0 5px rgba(255,210,74,.35), 0 0 38px 12px rgba(255,210,74,.65), 0 20px 40px rgba(0,0,0,.5); z-index:15; }
-  .lupa::after { content:""; position:absolute; inset:0; border-radius:50%; box-shadow:inset 0 0 22px rgba(0,0,0,.3); }
+          box-shadow:0 0 0 4px rgba(255,210,74,0.3), 0 16px 32px rgba(0,0,0,0.4); z-index:12; }
+  .lupa::after { content:""; position:absolute; inset:0; border-radius:50%; box-shadow:inset 0 0 16px rgba(0,0,0,0.2); }
 
-  .seta { position:absolute; left:var(--l); top:var(--t); width:52px; height:38px; background:#ffd24a; transform:rotate(var(--rot,0deg));
-          clip-path:polygon(0 30%,55% 30%,55% 0,100% 50%,55% 100%,55% 70%,0 70%); filter:drop-shadow(0 0 10px rgba(255,210,74,1)); animation:vai 1.3s ease-in-out infinite; z-index:12; }
+  /* Alerta flutuante */
+  .alerta-badge { position:absolute; left:5%; top:4%; background:#dc2626; color:#fff; font-weight:700; font-size:13px; padding:6px 12px; border-radius:999px; border:2px solid #fff; box-shadow:0 4px 16px rgba(220,38,38,0.5); z-index:10; }
 
-  .alerta { position:absolute; left:4%; top:3%; background:#c62828; color:#fff; font-weight:700; font-size:14px; padding:8px 14px; border-radius:999px; border:2px solid #fff; box-shadow:0 0 0 5px rgba(255,210,74,.4), 0 0 26px 8px rgba(255,210,74,.8); animation:pulso 2s ease-in-out infinite; z-index:12; }
+  /* Lista do Futuro */
+  .futuro { columns:2 280px; column-gap:32px; padding:0; list-style:none; margin:28px 0 0; }
+  .futuro li { break-inside:avoid; margin-bottom:18px; color:var(--muted); font-size:16px; background:var(--card-bg); border:1px solid var(--line); padding:18px; border-radius:14px; box-shadow:var(--shadow); }
+  .futuro b { color:var(--ink); display:block; margin-bottom:4px; font-size:17px; }
 
-  @keyframes pulso { 
-    0%, 100% { transform:scale(1); box-shadow:0 0 0 6px rgba(255,210,74,.25), 0 0 28px 10px rgba(255,210,74,.8), inset 0 0 16px rgba(255,210,74,.4); } 
-    50% { transform:scale(1.02); box-shadow:0 0 0 10px rgba(255,210,74,.2), 0 0 42px 16px rgba(255,210,74,.95), inset 0 0 22px rgba(255,210,74,.6); } 
-  }
-  @keyframes vai { 
-    0%, 100% { transform:translateX(0) rotate(var(--rot,0deg)); } 
-    50% { transform:translateX(9px) rotate(var(--rot,0deg)); } 
-  }
-  @media (prefers-reduced-motion:reduce) { .mk, .alerta, .seta { animation:none; } }
-
-  .futuro { columns:2 300px; column-gap:40px; padding:0; list-style:none; margin:0; }
-  .futuro li { break-inside:avoid; margin-bottom:14px; color:var(--muted); font-size:16px; }
-  .futuro b { color:var(--ink); display:block; }
-
-  .autor { background:var(--tint); border-radius:20px; padding:28px; display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+  /* Seção Contato & APK */
+  .autor { background:var(--card-bg); border:1px solid var(--line); border-radius:24px; padding:32px; display:flex; gap:24px; align-items:center; flex-wrap:wrap; box-shadow:var(--shadow); }
   .autor p { margin:0; }
-  .app { display:grid; gap:28px; }
-  @media (min-width:820px) { .app { grid-template-columns:1fr 1fr; gap:56px; align-items:start; } }
-  .passos { margin:0; padding-left:22px; }
-  .passos li { margin-bottom:8px; }
-  details { border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:18px; }
-  summary { cursor:pointer; font-weight:700; padding:14px 0; }
-  details p { color:var(--muted); font-size:16px; }
-  .pilula { display:inline-block; margin-top:12px; padding:4px 14px; border-radius:999px; background:var(--tint); color:var(--muted); font-size:15px; }
-  footer { margin-top:72px; border-top:1px solid var(--line); padding:24px 0 40px; color:var(--muted); font-size:15px; }
-  footer a { color:var(--green); }
+  
+  .app-grid { display:grid; gap:36px; }
+  @media (min-width:860px) { .app-grid { grid-template-columns:1fr 1fr; gap:56px; align-items:start; } }
+  .passos { margin:0; padding-left:22px; color:var(--muted); }
+  .passos li { margin-bottom:10px; font-size:17px; }
+  .passos strong { color:var(--ink); }
+
+  details { border:1px solid var(--line); border-radius:14px; padding:0 18px; margin-top:20px; background:var(--card-bg); box-shadow:var(--shadow); }
+  summary { cursor:pointer; font-weight:700; padding:16px 0; color:var(--ink); }
+  details p { color:var(--muted); font-size:16px; margin-bottom:16px; }
+  .pilula { display:inline-block; margin-top:14px; padding:6px 16px; border-radius:999px; background:var(--tint); border:1px solid var(--line); color:var(--muted); font-size:15px; font-weight:700; }
+
+  footer { margin-top:84px; border-top:1px solid var(--line); padding:32px 0 48px; color:var(--muted); font-size:15px; text-align:center; }
+  @media (min-width:768px) { footer { text-align:left; display:flex; align-items:center; justify-content:space-between; gap:20px; } }
+  footer a { color:var(--green); text-decoration:none; font-weight:700; }
+  footer a:hover { text-decoration:underline; }
+
   @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .botao { transition:none; } .botao:hover { transform:none; } }
 </style>
 </head>
@@ -137,18 +172,18 @@
 <header class="hero">
   <div class="wrap" style="display:block;padding-bottom:0">
     <div class="topo">
-      <a class="marca" href="#"><img src="icone-app.png" width="46" height="46" alt="">Combate às Endemias SP</a>
-      <nav aria-label="Principal"><a href="#como">Como funciona</a><a href="#recursos">Recursos</a><a href="#baixar">Baixar APK</a></nav>
+      <a class="marca" href="#"><img src="icone-app.png" width="44" height="44" alt="">Combate às Endemias SP</a>
+      <nav aria-label="Principal"><a href="#contexto">Super El Niño</a><a href="#como">Como Funciona</a><a href="#recursos">Recursos</a><a href="#baixar">Baixar APK</a></nav>
     </div>
   </div>
   <div class="wrap">
     <div>
-      <span style="display:inline-block;background:rgba(255,255,255,0.15);padding:4px 14px;border-radius:999px;font-size:14px;font-weight:700;margin-bottom:14px;">Tecnologia para Municípios do Estado de São Paulo</span>
-      <h1>Da resposta à prevenção: dados para decidir, território para agir.</h1>
-      <p class="sub">Plataforma e aplicativo móvel de apoio à vigilância em saúde que transforma o trabalho de campo em mapas de calor, indicadores entomológicos e relatórios estratégicos para equipes municipais.</p>
+      <span style="display:inline-block;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);padding:6px 16px;border-radius:999px;font-size:14px;font-weight:700;margin-bottom:16px;letter-spacing:0.02em;">Inteligência Territorial para Municípios Paulistas</span>
+      <h1>Da resposta tardia à prevenção baseada em dados: proteja seu município.</h1>
+      <p class="sub">Plataforma e aplicativo móvel de apoio à vigilância em saúde que transforma o trabalho de campo em mapas de calor, indicadores entomológicos e controle estratégico para evitar epidemias e internações.</p>
       <div class="botoes">
-        <a class="botao" href="#recursos">Conhecer o app</a>
-        <a class="botao alt js-contato" href="#contato" hidden>Quero para meu município</a>
+        <a class="botao" href="#recursos">Ver Recursos do App</a>
+        <a class="botao alt js-contato" href="#contato" hidden>Apresentação para Gestores</a>
       </div>
     </div>
     <div class="hero-arte"><img src="capa-conexoes.png" width="920" height="951" alt="Ícone oficial do aplicativo Combate às Endemias"></div>
@@ -157,49 +192,74 @@
 
 <main class="wrap">
 
-  <section id="como">
-    <h2>Como funciona</h2>
-    <p class="muted" style="max-width:62ch">Do registro em campo à tomada de decisão pela gestão municipal, em três etapas integradas.</p>
-    <div class="passos3">
-      <div class="passo3"><h3>O agente registra</h3><p>Focos, vistorias de PEIE, casos e reclamações são lançados direto pelo celular durante as visitas domiciliares.</p></div>
-      <div class="passo3"><h3>O app organiza</h3><p>Os dados se transformam automaticamente em mapas de calor, raio de risco, índices ADL e comparativos.</p></div>
-      <div class="passo3"><h3>A gestão decide</h3><p>Coordenadores e autoridades sanitárias visualizam onde o vetor e as arboviroses se concentram para direcionar equipes.</p></div>
-    </div>
-  </section>
-
-  <section id="porque">
-    <h2>Por que antecipar as ações no seu município?</h2>
-    <p class="muted" style="max-width:62ch">O cenário epidemiológico exige monitoramento contínuo. Dados oficiais do Ministério da Saúde demonstram a importância de uma preparação antecipada e baseada em evidências locais.</p>
+  <!-- Seção Alerta Super El Niño e Impacto Orçamentário -->
+  <section id="contexto">
+    <h2>Super El Niño, Explosão de Casos e o Impacto no Orçamento Municipal</h2>
+    <p class="muted" style="max-width:72ch">Fenômenos climáticos extremos como o **Super El Niño** elevam significativamente as temperaturas médias e alteram o regime de chuvas. Para os municípios do estado de São Paulo, isso representa um cenário crítico:</p>
+    
     <div class="numeros">
-      <div class="numero"><b>6,48 mi</b><span>casos prováveis de dengue no Brasil em 2024, frente a 1,65 mi em 2023</span></div>
-      <div class="numero"><b>+303,2%</b><span>de aumento nacional nos registros entre 2023 e 2024</span></div>
-      <div class="numero"><b>+344,5%</b><span>no acumulado das semanas 1 a 26 de 2024 comparado ao ano anterior</span></div>
+      <div class="numero">
+        <b>6,48 mi</b>
+        <span>casos prováveis de dengue no Brasil em 2024, comparados a 1,65 milhão em 2023.</span>
+      </div>
+      <div class="numero">
+        <b>+303%</b>
+        <span>de explosão nos registros nacionais impulsionada pelas mudanças térmicas e climáticas.</span>
+      </div>
+      <div class="numero">
+        <b>R$ Alto</b>
+        <span>custo financeiro e operacional com internações hospitalares e prontos-socorros lotados.</span>
+      </div>
     </div>
-    <div class="nota"><p><strong>Vantagem para a gestão municipal em SP:</strong> identificar bolsões de risco, antecipar ciclos de transmissão e otimizar o uso de insumos e pessoal, sem substituir as plataformas oficiais de notificação compulsória (SINAN).</p></div>
-    <p class="fonte">Fontes: Nota Informativa nº 3/2025 (CGARB/DEDT/SVSA/MS) e Boletim Epidemiológico nº 11/2024 do Ministério da Saúde.</p>
+
+    <div class="nota-alerta">
+      <h3>⚠️ O Risco Real para o Tesouro Municipal</h3>
+      <p>Quando a gestão municipal atua de forma reativa, o custo financeiro é devastador. Surtos descontrolados geram filas intermináveis nos postos de saúde, superlotação de leitos de internação, pagamento de horas extras emergenciais, aluguel de tendas de hidratação e aquisição emergencial de insumos com preços inflacionados. <strong>A prevenção ativa e direcionada por inteligência territorial é a única forma comprovada de evitar gastos milionários com internações e salvar vidas.</strong></p>
+    </div>
   </section>
 
+  <!-- Como Funciona -->
+  <section id="como">
+    <h2>Como funciona na rotina da Secretaria de Saúde</h2>
+    <p class="muted" style="max-width:62ch">Do apontamento em campo pelo agente até o direcionamento estratégico pela Secretaria de Saúde, em três etapas simples.</p>
+    <div class="passos3">
+      <div class="passo3">
+        <h3>1. O agente registra em campo</h3>
+        <p>Focos do vetor, vistorias de PEIE (Imóveis Especiais), casos suspeitos e reclamações lançados direto pelo celular, mesmo offline.</p>
+      </div>
+      <div class="passo3">
+        <h3>2. O sistema processa e mapeia</h3>
+        <p>Os registros geram automaticamente mapas de calor, raios de risco de 150m, índices ADL e gráficos comparativos.</p>
+      </div>
+      <div class="passo3">
+        <h3>3. A gestão previne e economiza</h3>
+        <p>A Secretaria identifica bolsões de transmissão com antecedência, otimizando equipes e evitando internações em massa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recursos do App com Destaques Visuais Limpos -->
   <section id="recursos">
-    <h2>O que o app faz</h2>
-    <p class="muted" style="max-width:62ch">Ferramentas robustas desenvolvidas por profissionais da área, reunidas em uma interface ágil tanto para o trabalho de campo quanto para o planejamento gerencial.</p>
+    <h2>O que o aplicativo faz</h2>
+    <p class="muted" style="max-width:62ch">Ferramentas essenciais desenvolvidas por especialistas em vigilância para otimizar o trabalho diário e a tomada de decisão.</p>
 
     <!-- Recurso 1: Painel Inicial -->
     <article class="recurso">
       <div>
         <span class="tag">Painel Gerencial</span>
-        <h3 style="font-size:24px">Tela inicial com indicador ADL e atalhos rápidos</h3>
-        <p class="muted">Visão panorâmica imediata para o agente e o coordenador logo ao abrir o aplicativo.</p>
+        <h3 style="font-size:26px">Tela inicial com Indicador ADL e Atalhos</h3>
+        <p class="muted">Visão panorâmica imediata para o agente e o coordenador sanitário ao abrir o sistema.</p>
         <ul>
-          <li>Cálculo e exibição do índice ADL/IIP por período (faixas de satisfatório, alerta e risco).</li>
-          <li>Identificação clara do ano vigente e ciclo de trabalho ativo.</li>
-          <li>Acesso rápido a focos, usuários, notificações em tempo real e monitoramento de casos.</li>
+          <li>Cálculo automático do índice IIP/ADL por período (faixas de satisfatório, alerta e risco).</li>
+          <li>Indicação clara do ano vigente e ciclo operacional ativo.</li>
+          <li>Acesso direto a focos, vistorias, notificações e acompanhamento de casos.</li>
         </ul>
       </div>
       <div class="vitrine">
         <div class="fone">
-          <img src="tela-inicial.jpg" width="600" height="914" loading="lazy" alt="Tela inicial do aplicativo">
-          <i class="mk" style="--l:3%;--t:19%;--w:94%;--h:21%"><b>Indicador ADL por faixa</b></i>
-          <span class="seta" style="--l:78%;--t:45%;--rot:180deg;"></span>
+          <img src="tela-inicial.jpg" width="600" height="914" loading="lazy" alt="Tela inicial">
+          <div class="mk" style="--l:5%;--t:18%;--w:90%;--h:23%;"></div>
+          <span class="mk-label" style="left:5%; top:12%;">Indicador ADL por Faixa</span>
         </div>
         <div class="lupa" style="--img:url(tela-inicial.jpg);--k:2.4;--px:50.0%;--py:14.0%;" aria-hidden="true"></div>
       </div>
@@ -209,20 +269,21 @@
     <article class="recurso inv">
       <div>
         <span class="tag">Geoprocessamento</span>
-        <h3 style="font-size:24px">Mapa de risco e focos reincidentes (raio de 150m)</h3>
-        <p class="muted">Cada foco lançado gera alertas visuais e análise espacial para impedir a proliferação do vetor.</p>
+        <h3 style="font-size:26px">Mapa de Risco e Focos Reincidentes</h3>
+        <p class="muted">Identifique com precisão onde o vetor está se concentrando antes que o surto aconteça.</p>
         <ul>
-          <li>Agrupamento inteligente com círculos de raio de 150 metros.</li>
-          <li>Cores por densidade: de 1 foco isolado até áreas de alta concentração (4+ focos).</li>
-          <li>Alerta automático ao agente quando um endereço apresenta reincidência em ciclos subsequentes.</li>
+          <li>Raio de 150 metros ao redor de cada foco para análise de proximidade.</li>
+          <li>Cores por intensidade: de focos isolados até áreas críticas com 4 ou mais registros.</li>
+          <li>Alerta ao agente quando um endereço volta a apresentar larvas em ciclos posteriores.</li>
         </ul>
       </div>
       <div class="vitrine">
-        <div class="fone">
-          <img src="mapa-risco.jpg" width="600" height="960" loading="lazy" alt="Mapa de risco de focos">
-          <i class="mk abx" style="--l:2%;--t:1%;--w:57%;--h:5.5%"><b>Focos consolidados no ciclo</b></i>
-          <i class="mk" style="--l:15%;--t:39%;--w:26%;--h:17%;--r:50%"><b>Área de calor / Foco denso</b></i>
-          <span class="seta" style="--l:62%;--t:44%;--rot:0deg;"></span>
+        <div class="fone-col">
+          <div class="fone">
+            <img src="mapa-risco.jpg" width="600" height="960" loading="lazy" alt="Mapa de risco">
+            <div class="mk" style="--l:8%;--t:35%;--w:32%;--h:20%;border-radius:50%;"></div>
+            <span class="mk-label" style="left:8%; top:29%;">Foco Denso (4+ registros)</span>
+          </div>
         </div>
         <div class="lupa" style="--img:url(mapa-risco.jpg);--k:2.6;--px:14.3%;--py:45.9%;" aria-hidden="true"></div>
       </div>
@@ -232,41 +293,42 @@
     <article class="recurso">
       <div>
         <span class="tag">Vigilância Epidemiológica</span>
-        <h3 style="font-size:24px">Mapa de casos suspeitos e confirmados com raio de busca</h3>
-        <p class="muted">Acompanhe a distribuição espacial das arboviroses no município em tempo real.</p>
+        <h3 style="font-size:26px">Mapa de Casos e Alertas em Tempo Real</h3>
+        <p class="muted">Integração espacial entre notificações de casos suspeitos/confirmados e as ações de campo.</p>
         <ul>
-          <li>Notificações push instantâneas para a equipe sempre que um novo caso é confirmado.</li>
-          <li>Raio de busca configurável ao redor da residência do paciente para varredura vetorial direcionada.</li>
+          <li>Notificações push instantâneas para a equipe ao registrar novo caso confirmado.</li>
+          <li>Raio de varredura configurável para bloqueio de transmissão no quarteirão.</li>
         </ul>
       </div>
       <div class="vitrine">
         <div class="fone">
           <img src="mapa-casos.jpg" width="600" height="960" loading="lazy" alt="Mapa de casos">
-          <span class="alerta">🔔 Novo caso confirmado!</span>
-          <i class="mk abx" style="--l:3%;--t:40%;--w:37%;--h:18%;--r:50%"><b>Concentração de casos</b></i>
-          <span class="seta" style="--l:55%;--t:48%;--rot:0deg;"></span>
+          <span class="alerta-badge">🔔 Novo Caso Confirmado!</span>
+          <div class="mk" style="--l:10%;--t:38%;--w:35%;--h:22%;border-radius:50%;"></div>
+          <span class="mk-label" style="left:10%; top:63%;">Concentração Epidemiológica</span>
         </div>
         <div class="lupa" style="--img:url(mapa-casos.jpg);--k:2.4;--px:-4.9%;--py:48.3%;" aria-hidden="true"></div>
       </div>
     </article>
 
-    <!-- Recurso 4: PEIE - Pontos Estratégicos -->
+    <!-- Recurso 4: PEIE -->
     <article class="recurso inv">
       <div>
-        <span class="tag">PEIE / Imóveis Especiais</span>
-        <h3 style="font-size:24px">Cadastro e Vistoria de Pontos Estratégicos</h3>
-        <p class="muted">Controle rigoroso de ferros-velhos, desmanches, borracharias, cemitérios e grandes depósitos.</p>
+        <span class="tag">Imóveis Especiais (PEIE)</span>
+        <h3 style="font-size:26px">Cadastro e Vistoria de Pontos Estratégicos</h3>
+        <p class="muted">Controle rigoroso de ferros-velhos, borracharias, cemitérios e depósitos de grande porte.</p>
         <ul>
-          <li>Histórico completo de vistorias por estabelecimento.</li>
-          <li>Gestão de tratamentos larvicidas aplicados e pendências encontradas.</li>
-          <li>Geração de relatórios específicos para fiscalização e exigências sanitárias.</li>
+          <li>Histórico completo de vistorias anteriores e tratamentos larvicidas aplicados.</li>
+          <li>Relatórios prontos para exigências de fiscalização sanitária municipal.</li>
         </ul>
       </div>
       <div class="vitrine">
-        <div class="fone">
-          <img src="reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Tela de controle PEIE">
-          <i class="mk" style="--l:4%;--t:24%;--w:92%;--h:14%"><b>Imóveis de alto risco cadastrados</b></i>
-          <span class="seta" style="--l:48%;--t:42%;--rot:90deg;"></span>
+        <div class="fone-col">
+          <div class="fone larga">
+            <img src="reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Tela PEIE">
+            <div class="mk" style="--l:5%;--t:22%;--w:90%;--h:16%;"></div>
+            <span class="mk-label" style="left:5%; top:16%;">Imóveis de Alto Risco Cadastrados</span>
+          </div>
         </div>
       </div>
     </article>
@@ -275,19 +337,18 @@
     <article class="recurso">
       <div>
         <span class="tag">Logística de Insumos</span>
-        <h3 style="font-size:24px">Controle de Estoque de Larvicidas e Equipamentos</h3>
-        <p class="muted">Gestão transparente dos materiais de campo e distribuição para as equipes.</p>
+        <h3 style="font-size:26px">Controle de Estoque de Larvicidas e Insumos</h3>
+        <p class="muted">Gestão transparente dos produtos de combate para evitar falta de material nas equipes.</p>
         <ul>
-          <li>Controle de entradas e saídas de larvicidas, EPIs e materiais de borrifação.</li>
-          <li>Prevenção de rupturas de estoque durante os períodos de pico de atendimento.</li>
-          <li>Registro de lotes e validade dos produtos utilizados no município.</li>
+          <li>Controle rigoroso de entradas, saídas e saldos de larvicidas e EPIs.</li>
+          <li>Prevenção de desabastecimento nos períodos de pico epidêmico.</li>
         </ul>
       </div>
       <div class="vitrine">
         <div class="fone larga">
           <img src="reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Controle de estoque">
-          <i class="mk abx" style="--l:4%;--t:61%;--w:92%;--h:14%"><b>Saldo de insumos e distribuição</b></i>
-          <span class="seta" style="--l:48%;--t:55%;--rot:270deg;"></span>
+          <div class="mk" style="--l:5%;--t:58%;--w:90%;--h:16%;"></div>
+          <span class="mk-label" style="left:5%; top:52%;">Saldo e Distribuição de Insumos</span>
         </div>
       </div>
     </article>
@@ -296,20 +357,19 @@
     <article class="recurso inv">
       <div>
         <span class="tag">Relatórios Executivos</span>
-        <h3 style="font-size:24px">Acompanhamento anual, por bairro e exportação em PDF/PNG</h3>
-        <p class="muted">Dados claros para reuniões com o executivo municipal, conselhos de saúde e secretaria.</p>
+        <h3 style="font-size:26px">Análise Anual, Bairros e Exportação PDF/PNG</h3>
+        <p class="muted">Apresente dados sólidos para o poder executivo, conselhos de saúde e prestação de contas.</p>
         <ul>
           <li>Gráficos comparativos de casos notificados vs. confirmados ano a ano.</li>
-          <li>Ranking de bairros com maior incidência para direcionar campanhas educativas.</li>
-          <li>Exportação imediata de relatórios em PDF e gráficos em PNG.</li>
+          <li>Ranking de bairros mais afetados para direcionamento de campanhas.</li>
+          <li>Exportação de relatórios gerenciais formatados em PDF e PNG.</li>
         </ul>
       </div>
       <div class="vitrine">
         <div class="fone">
           <img src="comparativo-anual.jpg" width="600" height="405" loading="lazy" alt="Comparativo anual">
-          <i class="mk dir" style="--l:26%;--t:13%;--w:17%;--h:62%"><b>Análise de picos históricos</b></i>
-          <i class="mk abx" style="--l:3%;--t:30%;--w:94%;--h:10%"><b>Exportação PDF e PNG</b></i>
-          <span class="seta" style="--l:45%;--t:22%;--rot:180deg;"></span>
+          <div class="mk" style="--l:5%;--t:25%;--w:90%;--h:60%;"></div>
+          <span class="mk-label" style="left:5%; top:18%;">Exportação Direta PDF / PNG</span>
         </div>
       </div>
     </article>
@@ -317,68 +377,82 @@
     <!-- Recurso 7: Reclamações -->
     <article class="recurso">
       <div>
-        <span class="tag">Ouvidoria e Munícipes</span>
-        <h3 style="font-size:24px">Registro de reclamações com fotos e geolocalização</h3>
-        <p class="muted">Centralize as demandas da população em um fluxo digital organizado e auditável.</p>
+        <span class="tag">Ouvidoria Cidadã</span>
+        <h3 style="font-size:26px">Registro de Reclamações com Fotos e GPS</h3>
+        <p class="muted">Centralize as demandas dos munícipes em um fluxo digital ágil e auditável.</p>
         <ul>
-          <li>Anexo de fotografias direto da câmera do celular na ocorrência.</li>
-          <li>Acompanhamento de status (pendente, em andamento, concluído).</li>
-          <li>Estatísticas dos bairros com maior volume de solicitações de limpeza e vistoria.</li>
+          <li>Fotos anexadas diretamente da câmera do celular na ocorrência.</li>
+          <li>Acompanhamento de status e estatísticas por região.</li>
         </ul>
       </div>
       <div class="vitrine">
         <div class="fone larga">
-          <img src="reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Tela de reclamações">
-          <i class="mk" style="--l:4%;--t:24%;--w:92%;--h:14%"><b>Registro ágil de ocorrências</b></i>
-          <i class="mk abx" style="--l:4%;--t:61%;--w:92%;--h:14%"><b>Resumo e estatísticas anuais</b></i>
-          <span class="seta" style="--l:48%;--t:35%;--rot:90deg;"></span>
+          <img src="reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Reclamações">
+          <div class="mk" style="--l:5%;--t:22%;--w:90%;--h:16%;"></div>
+          <span class="mk-label" style="left:5%; top:16%;">Novo Chamado em Segundos</span>
         </div>
       </div>
     </article>
   </section>
 
+  <!-- O que o Município Ganha -->
   <section id="ganhos">
-    <h2>O que o município ganha ao adotar a plataforma</h2>
-    <div class="ganhos" style="margin-top:28px">
-      <div><h3>Capacidade de Antecipação</h3><p>Reconheça sinais precoces de aumento vetorial antes que se transformem em epidemias generalizadas.</p></div>
-      <div><h3>Direcionamento Territorial</h3><p>Aloque equipes de Agentes de Endemias para os quarteirões e imóveis de maior risco comprovado.</p></div>
-      <div><h3>Gestão Baseada em Evidências</h3><p>Substitua planilhas dispersas por painéis unificados com indicadores entomológicos em tempo real.</p></div>
-      <div><h3>Prevenção Proativa</h3><p>Passe de uma atuação estritamente reativa nos surtos para um planejamento contínuo e estruturado.</p></div>
+    <h2>Benefícios diretos para a Gestão Municipal</h2>
+    <div class="ganhos-grid">
+      <div class="ganho-card">
+        <h3>Redução de Internações</h3>
+        <p>Ações preventivas oportunas evitam o agravamento dos casos e a superlotação hospitalar.</p>
+      </div>
+      <div class="ganho-card">
+        <h3>Economia Orçamentária</h3>
+        <p>Protege o tesouro municipal contra gastos emergenciais imprevistos com surtos e epidemias.</p>
+      </div>
+      <div class="ganho-card">
+        <h3>Eficiência Operacional</h3>
+        <p>Equipes de endemias alocadas exatamente onde há maior densidade de risco no território.</p>
+      </div>
+      <div class="ganho-card">
+        <h3>Transparência e Auditoria</h3>
+        <p>Indicadores confiáveis para relatórios de gestão, conselhos de saúde e tribunais de contas.</p>
+      </div>
     </div>
   </section>
 
+  <!-- Para onde o app caminha -->
   <section id="futuro">
-    <h2>Evolução e Próximos Passos</h2>
-    <p class="muted" style="max-width:62ch">Perspectivas de expansão tecnológica contínua para acompanhar as necessidades da vigilância em saúde.</p>
-    <ul class="futuro" style="margin-top:22px">
-      <li><b>Análise temporal ampliada</b>Séries históricas e tendências sazonais comparadas por bairro e ciclo.</li>
-      <li><b>Indicadores integrados</b>Cruzamento automatizado entre focos, casos humanos e dados entomológicos.</li>
-      <li><b>Apoio à gestão de equipes</b>Otimização de rotas de visita domiciliar com base nos mapas de calor.</li>
-      <li><b>Relatórios executivos gerenciais</b>Consolidação automática para prestação de contas e reuniões de conselho.</li>
-      <li><b>Educação em saúde</b>Geração de materiais informativos direcionados para ações comunitárias.</li>
-      <li><b>Interoperabilidade segura</b>Integração com bases oficiais estaduais e federais conforme diretrizes normativas.</li>
+    <h2>Evolução Contínua da Plataforma</h2>
+    <p class="muted" style="max-width:62ch">Perspectivas de aprimoramento tecnológico alinhadas às diretrizes da saúde pública.</p>
+    <ul class="futuro">
+      <li><b>Séries Históricas Avançadas</b>Tendências sazonais comparadas por bairro, ciclo e período climático.</li>
+      <li><b>Indicadores Entomológicos Integrados</b>Leitura cruzada entre focos, armadilhas e casos confirmados.</li>
+      <li><b>Otimização de Rotas de Campo</b>Distribuição inteligente de equipes baseada em geoprocessamento.</li>
+      <li><b>Relatórios Executivos Automatizados</b>Consolidação ágil para prestação de contas e reuniões técnicas.</li>
     </ul>
-    <div class="nota" style="margin-top:20px"><p>A eficácia dos mapas e relatórios depende da qualidade e regularidade dos lançamentos em campo. O aplicativo atua como ferramenta de suporte à decisão técnica e autoridade sanitária competente.</p></div>
+    <div class="nota" style="margin-top:28px">
+      <p>A tecnologia atua como apoio indispensável, respeitando sempre a autonomia técnica e a decisão soberana da autoridade sanitária municipal.</p>
+    </div>
   </section>
 
+  <!-- Contato e Apresentação -->
   <section id="contato">
     <div class="autor">
-      <div style="flex:1 1 280px">
+      <div style="flex:1 1 300px">
         <h2 style="font-size:26px">Desenvolvido por Gustavo Leite</h2>
         <p class="muted">Sanitarista, Tecnólogo em Agente Comunitário de Saúde e Endemias, e Técnico em Vigilância em Saúde.</p>
       </div>
-      <a class="botao verde js-contato" href="#" hidden>Solicitar apresentação para o município</a>
+      <a class="botao verde js-contato" href="#" hidden>Solicitar Apresentação para o Município</a>
     </div>
   </section>
 
+  <!-- Baixar APK -->
   <section id="baixar">
-    <div class="app">
+    <div class="app-grid">
       <div>
-        <h2>Equipes municipais: baixe ou atualize o app</h2>
-        <p class="muted">Disponível para dispositivos Android. O sistema avisa automaticamente quando há novas atualizações disponíveis.</p>
+        <h2>Baixe ou atualize o aplicativo</h2>
+        <p class="muted">Disponível para dispositivos Android. O sistema avisa automaticamente quando uma nova versão é publicada.</p>
         <div class="botoes">
           <a class="botao verde" href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases/latest/download/Endemias.apk">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>Baixar APK do App
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>Baixar APK Atualizado
           </a>
         </div>
         <span class="pilula" id="versao">Compatível com Android</span>
@@ -386,26 +460,32 @@
       <div>
         <ol class="passos">
           <li>Toque em <strong>Baixar APK</strong> e aguarde o término do download.</li>
-          <li>Abra o arquivo <strong>Endemias.apk</strong> pela barra de notificações ou pasta de Downloads.</li>
-          <li>Se o Android solicitar permissão de segurança, selecione <strong>Configurações</strong> e ative <strong>Permitir desta fonte</strong>.</li>
+          <li>Abra o arquivo <strong>Endemias.apk</strong> na barra de notificações ou pasta de Downloads.</li>
+          <li>Se o Android solicitar confirmação de segurança, toque em <strong>Configurações</strong> e ative <strong>Permitir desta fonte</strong>.</li>
           <li>Toque em <strong>Instalar</strong> e em seguida em <strong>Abrir</strong>.</li>
         </ol>
         <details>
-          <summary>Dúvida sobre o aviso de segurança do Android?</summary>
-          <p>É um procedimento padrão do sistema para aplicativos instalados fora da Google Play Store. Basta tocar em "Mais detalhes" e em "Instalar mesmo assim". O aplicativo é seguro e auditado.</p>
+          <summary>Apareceu um aviso de segurança do Android?</summary>
+          <p>É um procedimento padrão para apps instalados fora da Google Play Store. Toque em "Mais detalhes" e em "Instalar mesmo assim". O aplicativo é seguro e auditado.</p>
         </details>
       </div>
     </div>
   </section>
 
   <footer>
-    <img src="icone-app.png" width="40" height="40" alt="" style="display:inline-block;vertical-align:middle;border-radius:10px;margin-right:10px">Combate às Endemias · A tecnologia apoia, sem substituir, a atuação profissional, a investigação epidemiológica e a decisão soberana da autoridade sanitária municipal ·
-    <a href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases">Histórico de versões</a>
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <img src="icone-app.png" width="36" height="36" alt="" style="border-radius:8px;">
+      <strong>Combate às Endemias SP</strong>
+    </div>
+    <p style="margin:0; max-width:700px;">A tecnologia apoia, sem substituir, a atuação profissional, a investigação epidemiológica e a decisão soberana da autoridade sanitária municipal.</p>
+    <div style="margin-top:16px;">
+      <a href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases">Repositório e Histórico de Versões no GitHub</a>
+    </div>
   </footer>
 </main>
 
 <script>
-  // Insira o e-mail ou WhatsApp de contato para os municípios de SP:
+  // Insira o e-mail ou WhatsApp de contato para os municípios:
   var CONTATO = "mailto:gusleite99@gmail.com?subject=Interesse%20no%20app%20Combate%20%C3%A0s%20Endemias%20para%20o%20Munic%C3%pio";
 
   (function () {

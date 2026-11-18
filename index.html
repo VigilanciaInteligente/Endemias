@@ -4,253 +4,282 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b4d3c">
-<title>Combate às Endemias – Cruzeiro</title>
+<meta name="description" content="Aplicativo de apoio à vigilância em saúde: mapas de focos e casos, indicadores, comparativos por bairro e registro de reclamações, para municípios do estado de São Paulo.">
+<link rel="icon" type="image/png" href="img/icone-180.png">
+<link rel="apple-touch-icon" href="img/icone-180.png">
+<title>Combate às Endemias – inteligência territorial em vigilância em saúde</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #f6f7f2;
-    --ink: #15231f;
-    --muted: #4d5f58;
-    --green: #0d5c48;
-    --green-ink: #ffffff;
-    --mint: #4fc19b;
-    --line: #d3dcd5;
-    --tint: #e6eee6;
-    --focus: #e0a800;
-    color-scheme: light;
-  }
+  :root { --bg:#f6f7f2; --ink:#15231f; --muted:#4d5f58; --green:#0d5c48; --green-ink:#fff; --mint:#4fc19b; --line:#d3dcd5; --tint:#e6eee6; --focus:#e0a800; color-scheme:light; }
   @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f1916;
-      --ink: #eef3ee;
-      --muted: #a6b8b0;
-      --green: #4fc19b;
-      --green-ink: #07251c;
-      --line: #2b3d37;
-      --tint: #17262a;
-      --focus: #f2c230;
-      color-scheme: dark;
-    }
+    :root { --bg:#0f1916; --ink:#eef3ee; --muted:#a6b8b0; --green:#4fc19b; --green-ink:#07251c; --line:#2b3d37; --tint:#17262a; --focus:#f2c230; color-scheme:dark; }
   }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    font-size: 18px;
-    line-height: 1.55;
-  }
-  a:focus-visible, summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 22px; }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:18px/1.55 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a:focus-visible, summary:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+  img { max-width:100%; height:auto; display:block; }
+  .wrap { max-width:1020px; margin:0 auto; padding:0 22px; }
+  h1 { font-size:clamp(34px,6vw,54px); line-height:1.06; margin:0 0 18px; letter-spacing:-.015em; }
+  h2 { font-size:clamp(26px,4vw,34px); line-height:1.15; margin:0 0 14px; letter-spacing:-.01em; }
+  h3 { font-size:19px; margin:0 0 4px; }
+  p { margin:0 0 14px; }
+  .muted { color:var(--muted); }
+  section { padding:72px 0 0; }
 
-  /* Hero */
-  .hero {
-    background:
-      radial-gradient(rgba(255,255,255,.09) 1px, transparent 1.5px) 0 0 / 24px 24px,
-      linear-gradient(160deg, #0a4636 0%, #0d5c48 55%, #137a60 100%);
-    color: #fff;
-    border-radius: 0 0 32px 32px;
-    padding: 56px 0 64px;
-  }
-  .hero .wrap { display: grid; gap: 32px; align-items: center; }
-  .icone { width: 84px; height: 84px; margin-bottom: 22px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.25)); }
-  h1 { font-size: clamp(36px, 7vw, 56px); line-height: 1.05; margin: 0 0 16px; letter-spacing: -0.015em; }
-  .sub { font-size: 20px; line-height: 1.5; color: #d5ece3; margin: 0 0 30px; max-width: 30ch; }
-  .botao {
-    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-    background: #fff; color: #0a4636; text-decoration: none; font-weight: 700; font-size: 20px;
-    padding: 18px 30px; border-radius: 14px; width: 100%; max-width: 340px;
-    box-shadow: 0 10px 24px rgba(0,0,0,.28);
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .botao:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.32); }
-  .botao:focus-visible { outline-color: #f2c230; }
-  .botao svg { width: 24px; height: 24px; }
-  .pilula {
-    display: inline-block; margin-top: 16px; padding: 5px 14px; border-radius: 999px;
-    background: rgba(255,255,255,.14); color: #e4f4ed; font-size: 15px;
-  }
-  .arte { display: none; }
-  @media (min-width: 800px) {
-    .hero { padding: 80px 0 88px; }
-    .hero .wrap { grid-template-columns: 1.15fr .85fr; gap: 48px; }
-    .icone { display: none; }
-    .arte { display: grid; place-items: center; }
-    .arte-tile {
-      width: 260px; height: 260px; border-radius: 56px;
-      background: linear-gradient(145deg, #5fd0aa, #1a8a6c);
-      display: grid; place-items: center;
-      box-shadow: 0 30px 60px rgba(0,0,0,.35), inset 0 2px 0 rgba(255,255,255,.35);
-      transform: rotate(-6deg);
-    }
-    .arte-tile svg { width: 150px; height: 150px; }
+  .hero { background:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.5px) 0 0/24px 24px, linear-gradient(160deg,#0a4636 0%,#0d5c48 55%,#137a60 100%); color:#fff; border-radius:0 0 32px 32px; padding:56px 0 64px; overflow:hidden; }
+  .hero > .wrap { display:grid; gap:40px; align-items:center; }
+  .topo { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:36px; }
+  .topo a { color:#d5ece3; text-decoration:none; font-weight:700; }
+  .marca { display:flex; align-items:center; gap:12px; color:#fff !important; }
+  .marca img { width:46px; height:46px; border-radius:12px; }
+  .topo nav { display:none; gap:26px; font-size:16px; }
+  @media (min-width:700px) { .topo nav { display:flex; } }
+  .logo-grande { width:156px; height:156px; margin-bottom:26px; filter:drop-shadow(0 18px 30px rgba(0,0,0,.4)); }
+  .passos3 { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:26px; counter-reset:n; }
+  .passo3 { counter-increment:n; background:var(--tint); border-radius:18px; padding:24px 22px; }
+  .passo3::before { content:counter(n); display:grid; place-items:center; width:38px; height:38px; border-radius:50%; background:var(--green); color:var(--green-ink); font-weight:700; margin-bottom:14px; }
+  .passo3 p { margin:0; color:var(--muted); font-size:16px; }
+  .sub { font-size:20px; line-height:1.5; color:#d5ece3; max-width:36ch; margin-bottom:28px; }
+  .botoes { display:flex; flex-wrap:wrap; gap:12px; }
+  .botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; font-weight:700; font-size:18px; padding:15px 26px; border-radius:14px; background:#fff; color:#0a4636; box-shadow:0 10px 24px rgba(0,0,0,.25); transition:transform .15s; }
+  .botao:hover { transform:translateY(-2px); }
+  .botao.alt { background:#4fc19b; }
+  .botao.verde { background:var(--green); color:var(--green-ink); box-shadow:none; }
+  .botao svg { width:22px; height:22px; }
+  [hidden] { display:none !important; }
+
+  .fone { width:100%; max-width:290px; margin:0 auto; border:9px solid #0b1f19; border-radius:34px; overflow:hidden; background:#0b1f19; box-shadow:0 28px 55px rgba(0,0,0,.35); }
+  .fone.larga { max-width:380px; border-radius:24px; }
+  .hero .fone { transform:rotate(3deg); }
+
+  .numeros { display:grid; gap:28px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin:30px 0 26px; }
+  .numero b { display:block; font-size:clamp(38px,6vw,52px); line-height:1; color:var(--green); letter-spacing:-.02em; }
+  .numero span { display:block; margin-top:8px; color:var(--muted); font-size:16px; line-height:1.4; }
+  .nota { background:var(--tint); border-left:5px solid var(--green); border-radius:0 14px 14px 0; padding:16px 20px; max-width:720px; }
+  .nota p { margin:0; }
+  .fonte { font-size:14px; color:var(--muted); margin-top:16px; max-width:720px; }
+
+  .recurso { display:grid; gap:32px; align-items:center; padding:36px 0; border-top:1px solid var(--line); }
+  .recurso:first-of-type { margin-top:20px; }
+  .recurso ul { margin:0; padding-left:20px; color:var(--muted); }
+  .recurso li { margin-bottom:6px; }
+  .recurso .tag { display:inline-block; font-size:14px; font-weight:700; color:var(--green); background:var(--tint); border-radius:999px; padding:3px 12px; margin-bottom:12px; }
+  @media (min-width:820px) {
+    .hero > .wrap { grid-template-columns:1.15fr .85fr; }
+    .recurso { grid-template-columns:1fr 1fr; gap:64px; }
+    .recurso.inv .fone { order:-1; }
   }
 
-  /* Seções */
-  section { padding: 56px 0 0; }
-  h2 { font-size: 28px; line-height: 1.2; margin: 0 0 24px; letter-spacing: -0.01em; }
+  .ganhos { display:grid; gap:28px 36px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+  .ganhos p { color:var(--muted); font-size:16px; margin:0; }
+  .futuro { columns:2 300px; column-gap:40px; padding:0; list-style:none; margin:0; }
+  .futuro li { break-inside:avoid; margin-bottom:14px; color:var(--muted); font-size:16px; }
+  .futuro b { color:var(--ink); display:block; }
 
-  .destaques { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-  .destaque { display: flex; gap: 16px; align-items: flex-start; }
-  .ico {
-    flex: none; width: 48px; height: 48px; border-radius: 14px; background: var(--tint); color: var(--green);
-    display: grid; place-items: center;
-  }
-  .ico svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .destaque h3 { font-size: 18px; margin: 2px 0 4px; }
-  .destaque p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.45; }
-
-  .passos { list-style: none; padding: 0; margin: 0; counter-reset: p; max-width: 560px; }
-  .passos li { position: relative; padding: 0 0 28px 62px; counter-increment: p; }
-  .passos li::before {
-    content: counter(p); position: absolute; left: 0; top: 0; width: 42px; height: 42px; border-radius: 50%;
-    background: var(--green); color: var(--green-ink); display: grid; place-items: center; font-weight: 700; font-size: 19px;
-  }
-  .passos li::after { content: ""; position: absolute; left: 20px; top: 48px; bottom: 6px; width: 2px; background: var(--line); }
-  .passos li:last-child { padding-bottom: 0; }
-  .passos li:last-child::after { display: none; }
-  .passos strong { display: block; font-size: 19px; margin-bottom: 2px; }
-  .passos span { color: var(--muted); }
-
-  .aviso {
-    margin-top: 36px; max-width: 560px; background: var(--tint); border-radius: 16px; padding: 18px 20px;
-    border-left: 5px solid var(--green);
-  }
-  .aviso strong { display: block; margin-bottom: 4px; }
-  .aviso p { margin: 0; color: var(--muted); font-size: 16px; }
-
-  .faq { max-width: 680px; border-top: 1px solid var(--line); }
-  details { border-bottom: 1px solid var(--line); }
-  summary {
-    list-style: none; cursor: pointer; padding: 18px 40px 18px 0; position: relative; font-weight: 700;
-  }
-  summary::-webkit-details-marker { display: none; }
-  summary::after {
-    content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
-    font-size: 26px; font-weight: 400; color: var(--green); line-height: 1;
-  }
-  details[open] summary::after { content: "–"; }
-  details p { margin: 0 0 18px; color: var(--muted); max-width: 60ch; }
-
-  .planos { list-style: none; margin: 0 0 18px; padding: 0; max-width: 360px; }
-  .planos li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); color: var(--ink); }
-  .planos li:last-child { border-bottom: 0; }
-  .planos b { color: var(--green); white-space: nowrap; }
-  footer { margin-top: 64px; border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 15px; }
-  footer a { color: var(--green); }
-  @media (prefers-reduced-motion: reduce) { .botao { transition: none; } .botao:hover { transform: none; } }
+  .autor { background:var(--tint); border-radius:20px; padding:28px; display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+  .autor p { margin:0; }
+  .app { display:grid; gap:28px; }
+  @media (min-width:820px) { .app { grid-template-columns:1fr 1fr; gap:56px; align-items:start; } }
+  .passos { margin:0; padding-left:22px; }
+  .passos li { margin-bottom:8px; }
+  details { border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:18px; }
+  summary { cursor:pointer; font-weight:700; padding:14px 0; }
+  details p { color:var(--muted); font-size:16px; }
+  .pilula { display:inline-block; margin-top:12px; padding:4px 14px; border-radius:999px; background:var(--tint); color:var(--muted); font-size:15px; }
+  footer { margin-top:72px; border-top:1px solid var(--line); padding:24px 0 40px; color:var(--muted); font-size:15px; }
+  footer a { color:var(--green); }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .botao { transition:none; } .botao:hover { transform:none; } }
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="emblema" viewBox="0 0 64 64">
-    <path d="M32 5l21 7.5V29c0 14.5-9.2 24.5-21 30C20.2 53.5 11 43.5 11 29V12.5z" fill="#fff"/>
-    <path d="M32 20v22M21 31h22" stroke="#0d5c48" stroke-width="6" stroke-linecap="round" fill="none"/>
-  </symbol>
-</svg>
 
 <header class="hero">
+  <div class="wrap" style="display:block;padding-bottom:0">
+    <div class="topo">
+      <a class="marca" href="#"><img src="img/icone-app.png" width="46" height="46" alt="">Combate às Endemias</a>
+      <nav aria-label="Principal"><a href="#como">Como funciona</a><a href="#recursos">Recursos</a><a href="#baixar">Baixar</a></nav>
+    </div>
+  </div>
   <div class="wrap">
     <div>
-      <svg class="icone" viewBox="0 0 84 84" aria-hidden="true">
-        <rect width="84" height="84" rx="22" fill="#4fc19b"/>
-        <use href="#emblema" x="14" y="14" width="56" height="56"/>
-      </svg>
-      <h1>Combate às Endemias</h1>
-      <p class="sub">Aplicativo para Android. Baixe, instale e use no celular, sem precisar da Play Store.</p>
-      <a class="botao" id="baixar" href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases/latest/download/Endemias.apk">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>
-        Baixar APK
-      </a>
-      <div><span class="pilula" id="versao">Somente para Android</span></div>
+      <img class="logo-grande" src="img/icone-app.png" width="300" height="300" alt="Ícone oficial do aplicativo Combate às Endemias">
+      <h1>Da resposta à prevenção: dados para decidir, território para agir.</h1>
+      <p class="sub">Um aplicativo de apoio à vigilância em saúde que transforma registros de campo em mapas, indicadores e comparativos para orientar as equipes do município.</p>
+      <div class="botoes">
+        <a class="botao" href="#recursos">Conhecer o app</a>
+        <a class="botao alt js-contato" href="#contato" hidden>Quero para meu município</a>
+      </div>
     </div>
-    <div class="arte" aria-hidden="true">
-      <div class="arte-tile"><svg viewBox="0 0 64 64"><use href="#emblema"/></svg></div>
-    </div>
+    <div class="fone"><img src="img/tela-inicial.jpg" width="600" height="914" alt="Tela inicial do aplicativo com o índice ADL por período e atalhos para focos, usuários, notificações e casos"></div>
   </div>
 </header>
 
 <main class="wrap">
-  <section>
-    <div class="destaques">
-      <div class="destaque">
-        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></div>
-        <div><h3>Planos flexíveis</h3><p>Do plano de 30 dias ao vitalício, você escolhe o que cabe no seu uso.</p></div>
-      </div>
-      <div class="destaque">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
-        <div><h3>Instalação direta</h3><p>Baixe o arquivo e instale no celular, sem passar pela Play Store.</p></div>
-      </div>
-      <div class="destaque">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 7H4c0-1 2-2 2-7z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div>
-        <div><h3>Aviso de atualização</h3><p>Ao abrir, o app avisa quando existe uma versão nova.</p></div>
-      </div>
+
+  <section id="como">
+    <h2>Como funciona</h2>
+    <p class="muted" style="max-width:62ch">Do registro no campo à decisão da gestão, em três etapas simples.</p>
+    <div class="passos3">
+      <div class="passo3"><h3>O agente registra</h3><p>Focos, casos e reclamações são lançados direto no celular, durante o trabalho de campo.</p></div>
+      <div class="passo3"><h3>O app organiza</h3><p>Os registros viram mapas, indicadores e comparativos por ciclo, ano e bairro.</p></div>
+      <div class="passo3"><h3>A gestão decide</h3><p>Equipes e gestores veem onde o risco se concentra e priorizam as ações.</p></div>
     </div>
   </section>
 
-  <section>
-    <h2>Como instalar</h2>
-    <ol class="passos">
-      <li><strong>Baixe o arquivo</strong><span>Toque em Baixar APK e espere o download terminar.</span></li>
-      <li><strong>Abra o Endemias.apk</strong><span>Pela notificação ou pela pasta Downloads do celular.</span></li>
-      <li><strong>Permita a instalação</strong><span>Se o Android bloquear, toque em Configurações e ative Permitir desta fonte.</span></li>
-      <li><strong>Instale e abra</strong><span>Toque em Instalar e depois em Abrir.</span></li>
-    </ol>
-    <div class="aviso">
-      <strong>Apareceu um aviso de segurança?</strong>
-      <p>É esperado: o app não está na Play Store, então o Android pede confirmação. Toque em Mais detalhes e depois em Instalar mesmo assim.</p>
+  <section id="porque">
+    <h2>Por que antecipar?</h2>
+    <p class="muted" style="max-width:62ch">As arboviroses podem mudar de patamar em poucos meses. Os dados oficiais mostram por que o acompanhamento contínuo e a preparação antecipada fazem diferença para o serviço municipal.</p>
+    <div class="numeros">
+      <div class="numero"><b>6,48 mi</b><span>casos prováveis de dengue no Brasil em 2024, contra 1,65 milhão em 2023</span></div>
+      <div class="numero"><b>+303,2%</b><span>de aumento entre 2023 e 2024 nos casos prováveis</span></div>
+      <div class="numero"><b>+344,5%</b><span>nas semanas epidemiológicas 1 a 26 de 2024, frente ao mesmo período de 2023</span></div>
+    </div>
+    <div class="nota"><p><strong>Para a gestão municipal:</strong> localizar concentrações, reconhecer mudanças no padrão de ocorrência e organizar respostas proporcionais ao risco. O aplicativo apoia essa análise local, sem substituir os sistemas oficiais de notificação e investigação.</p></div>
+    <p class="fonte">Fontes: Nota Informativa nº 3/2025 (CGARB/DEDT/SVSA/MS) e Boletim Epidemiológico, vol. 55, nº 11, de 4 de julho de 2024, do Ministério da Saúde.</p>
+  </section>
+
+  <section id="recursos">
+    <h2>O que o app faz</h2>
+    <p class="muted" style="max-width:62ch">Informações que já fazem parte da rotina de controle de endemias, reunidas em uma interface simples para o agente e útil para a gestão.</p>
+
+    <article class="recurso">
+      <div>
+        <span class="tag">Focos</span>
+        <h3 style="font-size:24px">Mapa de risco e focos reincidentes</h3>
+        <p class="muted">Cada foco registrado no campo aparece no mapa do ciclo selecionado, com círculos de raio de 150 metros que mostram a proximidade entre registros.</p>
+        <ul>
+          <li>Cores por intensidade: um foco, dois ou três, quatro ou mais.</li>
+          <li>Aviso ao agente quando um local volta a apresentar focos em ciclos posteriores.</li>
+          <li>Apoio à priorização de visitas, ações educativas e controle vetorial.</li>
+        </ul>
+      </div>
+      <div class="fone"><img src="img/mapa-risco.jpg" width="600" height="960" loading="lazy" alt="Mapa de risco com círculos coloridos indicando a concentração de focos por ciclo"></div>
+    </article>
+
+    <article class="recurso inv">
+      <div>
+        <span class="tag">Casos</span>
+        <h3 style="font-size:24px">Mapa de casos suspeitos e confirmados</h3>
+        <p class="muted">A localização dos casos registrados ajuda a reconhecer concentrações e a articular as equipes, com raio de busca configurável.</p>
+        <ul>
+          <li>Notificação em tempo real aos usuários quando há novo caso confirmado e sua localidade.</li>
+          <li>Apoio à priorização de áreas, sem substituir a investigação epidemiológica.</li>
+        </ul>
+      </div>
+      <div class="fone"><img src="img/mapa-casos.jpg" width="600" height="960" loading="lazy" alt="Mapa epidemiológico com pontos de casos e áreas de busca ao redor"></div>
+    </article>
+
+    <article class="recurso">
+      <div>
+        <span class="tag">Indicadores</span>
+        <h3 style="font-size:24px">Acompanhamento anual e por bairro</h3>
+        <p class="muted">Um comparativo entre casos notificados e confirmados, ano a ano, com o detalhamento por bairro ou região.</p>
+        <ul>
+          <li>Ranking de bairros e identificação da maior concentração.</li>
+          <li>Filtros por ano, status e ordenação.</li>
+          <li>Exportação em PDF e PNG para reuniões, relatórios e palestras.</li>
+        </ul>
+      </div>
+      <div class="fone"><img src="img/comparativo-anual.jpg" width="600" height="405" loading="lazy" alt="Gráfico de barras comparando casos notificados e confirmados por ano"></div>
+    </article>
+
+    <article class="recurso inv">
+      <div>
+        <span class="tag">Reclamações</span>
+        <h3 style="font-size:24px">Registro de reclamações com fotos</h3>
+        <p class="muted">As manifestações dos munícipes ficam em um sistema digital padronizado, no lugar de registros dispersos e de difícil rastreio.</p>
+        <ul>
+          <li>Fotos e documentos anexados a cada ocorrência.</li>
+          <li>Acompanhamento do andamento e das pendências.</li>
+          <li>Análise dos assuntos mais frequentes e das regiões com mais ocorrências.</li>
+          <li>Exportação de documentos para encaminhar a outros setores.</li>
+        </ul>
+      </div>
+      <div class="fone larga"><img src="img/reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Tela do registro de reclamações com opções de registrar, consultar e ver o resumo anual"></div>
+    </article>
+  </section>
+
+  <section id="ganhos">
+    <h2>O que o município ganha</h2>
+    <div class="ganhos" style="margin-top:28px">
+      <div><h3>Capacidade de antecipação</h3><p>Reconhecer sinais de alerta com maior antecedência e organizar respostas oportunas.</p></div>
+      <div><h3>Direcionamento territorial</h3><p>Priorizar áreas e atividades com base na distribuição dos registros e na avaliação técnica.</p></div>
+      <div><h3>Informação para decidir</h3><p>Dados organizados para apoiar o planejamento da gestão e das equipes.</p></div>
+      <div><h3>Prevenção fortalecida</h3><p>Sair de uma atuação predominantemente reativa para uma prática planejada, contínua e orientada por evidências.</p></div>
     </div>
   </section>
 
-  <section>
-    <h2>Perguntas frequentes</h2>
-    <div class="faq">
-      <details open>
-        <summary>Quais são os planos de uso e quanto custam?</summary>
-        <div>
-          <ul class="planos">
-            <li><span>30 dias</span><b>R$ 9,99</b></li>
-            <li><span>60 dias</span><b>R$ 17,99</b></li>
-            <li><span>90 dias</span><b>R$ 24,99</b></li>
-            <li><span>Anual</span><b>R$ 49,99</b></li>
-            <li><span>Vitalício</span><b>R$ 89,99</b></li>
-          </ul>
-        </div>
-      </details>
-      <details>
-        <summary>Funciona no iPhone?</summary>
-        <p>Não. Este arquivo é somente para celulares Android.</p>
-      </details>
-      <details>
-        <summary>Como atualizo o app?</summary>
-        <p>Quando houver versão nova, o app avisa ao ser aberto. Toque em Baixar, abra o arquivo e instale por cima da versão atual. Os dados do app são mantidos.</p>
-      </details>
-      <details>
-        <summary>O download não começou. O que faço?</summary>
-        <p>Confira a conexão com a internet e toque em Baixar APK de novo. Se o navegador perguntar, permita o download do arquivo.</p>
-      </details>
+  <section id="futuro">
+    <h2>Para onde o app caminha</h2>
+    <p class="muted" style="max-width:62ch">Perspectivas de evolução. Os itens abaixo ainda não fazem parte da versão atual.</p>
+    <ul class="futuro" style="margin-top:22px">
+      <li><b>Análise temporal ampliada</b>Séries históricas e tendências por bairro, ciclo e período sazonal.</li>
+      <li><b>Indicadores territoriais integrados</b>Leitura conjunta de focos, casos e indicadores entomológicos.</li>
+      <li><b>Apoio à gestão de equipes</b>Distribuição de esforços conforme as evidências do território.</li>
+      <li><b>Relatórios gerenciais</b>Consolidação para reuniões técnicas e prestação de contas.</li>
+      <li><b>Educação em saúde</b>Informações contextualizadas para ações educativas e comunicação com a população.</li>
+      <li><b>Interoperabilidade e governança</b>Integração com bases oficiais e perfis de acesso, conforme viabilidade técnica e normativa.</li>
+    </ul>
+    <div class="nota" style="margin-top:20px"><p>Os mapas e indicadores dependem da qualidade, da atualização e da completude dos registros inseridos. A interpretação deve seguir os protocolos vigentes e a competência das áreas técnicas responsáveis.</p></div>
+  </section>
+
+  <section id="contato">
+    <div class="autor">
+      <div style="flex:1 1 280px">
+        <h2 style="font-size:26px">Desenvolvido por Gustavo Leite</h2>
+        <p class="muted">Sanitarista, tecnólogo em Agente Comunitário de Saúde e Endemias e técnico em Vigilância em Saúde.</p>
+      </div>
+      <a class="botao verde js-contato" href="#" hidden>Solicitar apresentação</a>
+    </div>
+  </section>
+
+  <section id="baixar">
+    <div class="app">
+      <div>
+        <h2>Já usa o app? Baixe ou atualize</h2>
+        <p class="muted">Disponível para Android, com instalação direta pelo arquivo APK. Ao abrir, o app avisa quando existe versão nova.</p>
+        <div class="botoes"><a class="botao verde" href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases/latest/download/Endemias.apk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>Baixar APK</a></div>
+        <span class="pilula" id="versao">Somente para Android</span>
+      </div>
+      <div>
+        <ol class="passos">
+          <li>Toque em <strong>Baixar APK</strong> e espere o download terminar.</li>
+          <li>Abra o <strong>Endemias.apk</strong> pela notificação ou pela pasta Downloads.</li>
+          <li>Se o Android bloquear, toque em <strong>Configurações</strong> e ative <strong>Permitir desta fonte</strong>.</li>
+          <li>Toque em <strong>Instalar</strong> e depois em <strong>Abrir</strong>.</li>
+        </ol>
+        <details>
+          <summary>Apareceu um aviso de segurança?</summary>
+          <p>É esperado: o app não está na Play Store, então o Android pede confirmação. Toque em Mais detalhes e depois em Instalar mesmo assim.</p>
+        </details>
+      </div>
     </div>
   </section>
 
   <footer>
-    Combate às Endemias – Cruzeiro ·
+    <img src="img/icone-app.png" width="40" height="40" alt="" style="display:inline-block;vertical-align:middle;border-radius:10px;margin-right:10px">Combate às Endemias · A tecnologia apoia, e não substitui, a atuação dos profissionais, a investigação epidemiológica e a decisão da autoridade sanitária ·
     <a href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases">Todas as versões</a>
   </footer>
 </main>
 
 <script>
+  // Coloque aqui o contato para os municípios (ex.: "mailto:seu@email.com" ou "https://wa.me/55DDDNUMERO").
+  // Enquanto estiver vazio, os botões de contato ficam escondidos.
+  var CONTATO = "mailto:gusleite99@gmail.com?subject=Interesse%20no%20app%20Combate%20%C3%A0s%20Endemias";
+
   (function () {
+    if (CONTATO) {
+      document.querySelectorAll(".js-contato").forEach(function (a) { a.href = CONTATO; a.hidden = false; });
+    }
     var el = document.getElementById("versao");
     fetch("versao.json?t=" + Date.now())
       .then(function (r) { return r.json(); })
-      .then(function (v) {
-        if (v && v.versionName) { el.textContent = "Versão " + v.versionName + " · Android"; }
-      })
+      .then(function (v) { if (v && v.versionName) { el.textContent = "Versão " + v.versionName + " · Android"; } })
       .catch(function () {});
   })();
 </script>

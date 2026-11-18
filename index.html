@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b4d3c">
-<meta name="description" content="Aplicativo de apoio à vigilância em saúde: mapas de focos e casos, indicadores, comparativos por bairro e registro de reclamações, para municípios do estado de São Paulo.">
+<meta name="description" content="Aplicativo de apoio à vigilância em saúde e controle de endemias para municípios do estado de São Paulo: mapas de focos, casos, PEIE, controle de estoque, indicadores e registro de reclamações.">
 <link rel="icon" type="image/png" href="icone-180.png">
 <link rel="apple-touch-icon" href="icone-180.png">
-<title>Combate às Endemias – inteligência territorial em vigilância em saúde</title>
+<title>Combate às Endemias – Inteligência Territorial em Vigilância em Saúde para Municípios de SP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
@@ -39,12 +39,11 @@
   @media (min-width:700px) { .topo nav { display:flex; } }
   .hero-arte { order:-1; max-width:300px; margin:0 auto; }
   .hero-arte img { width:100%; height:auto; filter:drop-shadow(0 22px 40px rgba(0,0,0,.3)); }
-  .logo-grande { width:156px; height:156px; margin-bottom:26px; filter:drop-shadow(0 18px 30px rgba(0,0,0,.4)); }
   .passos3 { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:26px; counter-reset:n; }
   .passo3 { counter-increment:n; background:var(--tint); border-radius:18px; padding:24px 22px; }
   .passo3::before { content:counter(n); display:grid; place-items:center; width:38px; height:38px; border-radius:50%; background:var(--green); color:var(--green-ink); font-weight:700; margin-bottom:14px; }
   .passo3 p { margin:0; color:var(--muted); font-size:16px; }
-  .sub { font-size:20px; line-height:1.5; color:#d5ece3; max-width:36ch; margin-bottom:28px; }
+  .sub { font-size:20px; line-height:1.5; color:#d5ece3; max-width:38ch; margin-bottom:28px; }
   .botoes { display:flex; flex-wrap:wrap; gap:12px; }
   .botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; font-weight:700; font-size:18px; padding:15px 26px; border-radius:14px; background:#fff; color:#0a4636; box-shadow:0 10px 24px rgba(0,0,0,.25); transition:transform .15s; }
   .botao:hover { transform:translateY(-2px); }
@@ -78,6 +77,42 @@
 
   .ganhos { display:grid; gap:28px 36px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
   .ganhos p { color:var(--muted); font-size:16px; margin:0; }
+
+  /* Destaques sobre as telas - Aprimorados (maiores, brilhantes e com setas) */
+  .vitrine { position:relative; width:100%; max-width:340px; margin:0 auto; }
+  .vitrine .fone { max-width:none; position:relative; overflow:visible; }
+  .vitrine .fone img { border-radius:25px; }
+  .vitrine .fone.larga img { border-radius:15px; }
+  
+  .mk { position:absolute; left:var(--l); top:var(--t); width:var(--w); height:var(--h); border:4px solid #ffd24a; border-radius:var(--r,12px); pointer-events:none;
+        box-shadow:0 0 0 6px rgba(255,210,74,.32), 0 0 32px 10px rgba(255,210,74,.85), inset 0 0 18px rgba(255,210,74,.45); animation:pulso 2s ease-in-out infinite; z-index:10; }
+  .mk b { position:absolute; left:8px; bottom:100%; margin-bottom:12px; background:#ffd24a; color:#2c1e00; font-size:14px; line-height:1.3; font-weight:700; padding:6px 12px; border-radius:10px; white-space:nowrap; box-shadow:0 6px 16px rgba(0,0,0,.45); }
+  .mk b::after { content:""; position:absolute; left:18px; top:100%; border:8px solid transparent; border-top-color:#ffd24a; }
+  .mk.abx b { bottom:auto; top:100%; margin:12px 0 0; }
+  .mk.abx b::after { top:auto; bottom:100%; border-top-color:transparent; border-bottom-color:#ffd24a; }
+  .mk.dir b { left:auto; right:8px; }
+  .mk.dir b::after { left:auto; right:18px; }
+
+  .lupa { position:absolute; right:-6%; bottom:4%; width:48%; aspect-ratio:1; border-radius:50%; border:5px solid #ffd24a; background-repeat:no-repeat; background-color:#fff;
+          background-image:var(--img); background-size:calc(var(--k)*100%) auto; background-position:var(--px) var(--py);
+          box-shadow:0 0 0 5px rgba(255,210,74,.35), 0 0 38px 12px rgba(255,210,74,.65), 0 20px 40px rgba(0,0,0,.5); z-index:15; }
+  .lupa::after { content:""; position:absolute; inset:0; border-radius:50%; box-shadow:inset 0 0 22px rgba(0,0,0,.3); }
+
+  .seta { position:absolute; left:var(--l); top:var(--t); width:52px; height:38px; background:#ffd24a; transform:rotate(var(--rot,0deg));
+          clip-path:polygon(0 30%,55% 30%,55% 0,100% 50%,55% 100%,55% 70%,0 70%); filter:drop-shadow(0 0 10px rgba(255,210,74,1)); animation:vai 1.3s ease-in-out infinite; z-index:12; }
+
+  .alerta { position:absolute; left:4%; top:3%; background:#c62828; color:#fff; font-weight:700; font-size:14px; padding:8px 14px; border-radius:999px; border:2px solid #fff; box-shadow:0 0 0 5px rgba(255,210,74,.4), 0 0 26px 8px rgba(255,210,74,.8); animation:pulso 2s ease-in-out infinite; z-index:12; }
+
+  @keyframes pulso { 
+    0%, 100% { transform:scale(1); box-shadow:0 0 0 6px rgba(255,210,74,.25), 0 0 28px 10px rgba(255,210,74,.8), inset 0 0 16px rgba(255,210,74,.4); } 
+    50% { transform:scale(1.02); box-shadow:0 0 0 10px rgba(255,210,74,.2), 0 0 42px 16px rgba(255,210,74,.95), inset 0 0 22px rgba(255,210,74,.6); } 
+  }
+  @keyframes vai { 
+    0%, 100% { transform:translateX(0) rotate(var(--rot,0deg)); } 
+    50% { transform:translateX(9px) rotate(var(--rot,0deg)); } 
+  }
+  @media (prefers-reduced-motion:reduce) { .mk, .alerta, .seta { animation:none; } }
+
   .futuro { columns:2 300px; column-gap:40px; padding:0; list-style:none; margin:0; }
   .futuro li { break-inside:avoid; margin-bottom:14px; color:var(--muted); font-size:16px; }
   .futuro b { color:var(--ink); display:block; }
@@ -99,24 +134,24 @@
 </head>
 <body>
 
-
 <header class="hero">
   <div class="wrap" style="display:block;padding-bottom:0">
     <div class="topo">
-      <a class="marca" href="#"><img src="icone-app.png" width="46" height="46" alt="">Combate às Endemias</a>
-      <nav aria-label="Principal"><a href="#como">Como funciona</a><a href="#recursos">Recursos</a><a href="#baixar">Baixar</a></nav>
+      <a class="marca" href="#"><img src="icone-app.png" width="46" height="46" alt="">Combate às Endemias SP</a>
+      <nav aria-label="Principal"><a href="#como">Como funciona</a><a href="#recursos">Recursos</a><a href="#baixar">Baixar APK</a></nav>
     </div>
   </div>
   <div class="wrap">
     <div>
+      <span style="display:inline-block;background:rgba(255,255,255,0.15);padding:4px 14px;border-radius:999px;font-size:14px;font-weight:700;margin-bottom:14px;">Tecnologia para Municípios do Estado de São Paulo</span>
       <h1>Da resposta à prevenção: dados para decidir, território para agir.</h1>
-      <p class="sub">Um aplicativo de apoio à vigilância em saúde que transforma registros de campo em mapas, indicadores e comparativos para orientar as equipes do município.</p>
+      <p class="sub">Plataforma e aplicativo móvel de apoio à vigilância em saúde que transforma o trabalho de campo em mapas de calor, indicadores entomológicos e relatórios estratégicos para equipes municipais.</p>
       <div class="botoes">
         <a class="botao" href="#recursos">Conhecer o app</a>
         <a class="botao alt js-contato" href="#contato" hidden>Quero para meu município</a>
       </div>
     </div>
-    <div class="hero-arte"><img src="capa-conexoes.png" width="920" height="951" alt="Ícone oficial do aplicativo Combate às Endemias, ao centro de um chip com conexões ao redor"></div>
+    <div class="hero-arte"><img src="capa-conexoes.png" width="920" height="951" alt="Ícone oficial do aplicativo Combate às Endemias"></div>
   </div>
 </header>
 
@@ -124,169 +159,254 @@
 
   <section id="como">
     <h2>Como funciona</h2>
-    <p class="muted" style="max-width:62ch">Do registro no campo à decisão da gestão, em três etapas simples.</p>
+    <p class="muted" style="max-width:62ch">Do registro em campo à tomada de decisão pela gestão municipal, em três etapas integradas.</p>
     <div class="passos3">
-      <div class="passo3"><h3>O agente registra</h3><p>Focos, casos e reclamações são lançados direto no celular, durante o trabalho de campo.</p></div>
-      <div class="passo3"><h3>O app organiza</h3><p>Os registros viram mapas, indicadores e comparativos por ciclo, ano e bairro.</p></div>
-      <div class="passo3"><h3>A gestão decide</h3><p>Equipes e gestores veem onde o risco se concentra e priorizam as ações.</p></div>
+      <div class="passo3"><h3>O agente registra</h3><p>Focos, vistorias de PEIE, casos e reclamações são lançados direto pelo celular durante as visitas domiciliares.</p></div>
+      <div class="passo3"><h3>O app organiza</h3><p>Os dados se transformam automaticamente em mapas de calor, raio de risco, índices ADL e comparativos.</p></div>
+      <div class="passo3"><h3>A gestão decide</h3><p>Coordenadores e autoridades sanitárias visualizam onde o vetor e as arboviroses se concentram para direcionar equipes.</p></div>
     </div>
   </section>
 
   <section id="porque">
-    <h2>Por que antecipar?</h2>
-    <p class="muted" style="max-width:62ch">As arboviroses podem mudar de patamar em poucos meses. Os dados oficiais mostram por que o acompanhamento contínuo e a preparação antecipada fazem diferença para o serviço municipal.</p>
+    <h2>Por que antecipar as ações no seu município?</h2>
+    <p class="muted" style="max-width:62ch">O cenário epidemiológico exige monitoramento contínuo. Dados oficiais do Ministério da Saúde demonstram a importância de uma preparação antecipada e baseada em evidências locais.</p>
     <div class="numeros">
-      <div class="numero"><b>6,48 mi</b><span>casos prováveis de dengue no Brasil em 2024, contra 1,65 milhão em 2023</span></div>
-      <div class="numero"><b>+303,2%</b><span>de aumento entre 2023 e 2024 nos casos prováveis</span></div>
-      <div class="numero"><b>+344,5%</b><span>nas semanas epidemiológicas 1 a 26 de 2024, frente ao mesmo período de 2023</span></div>
+      <div class="numero"><b>6,48 mi</b><span>casos prováveis de dengue no Brasil em 2024, frente a 1,65 mi em 2023</span></div>
+      <div class="numero"><b>+303,2%</b><span>de aumento nacional nos registros entre 2023 e 2024</span></div>
+      <div class="numero"><b>+344,5%</b><span>no acumulado das semanas 1 a 26 de 2024 comparado ao ano anterior</span></div>
     </div>
-    <div class="nota"><p><strong>Para a gestão municipal:</strong> localizar concentrações, reconhecer mudanças no padrão de ocorrência e organizar respostas proporcionais ao risco. O aplicativo apoia essa análise local, sem substituir os sistemas oficiais de notificação e investigação.</p></div>
-    <p class="fonte">Fontes: Nota Informativa nº 3/2025 (CGARB/DEDT/SVSA/MS) e Boletim Epidemiológico, vol. 55, nº 11, de 4 de julho de 2024, do Ministério da Saúde.</p>
+    <div class="nota"><p><strong>Vantagem para a gestão municipal em SP:</strong> identificar bolsões de risco, antecipar ciclos de transmissão e otimizar o uso de insumos e pessoal, sem substituir as plataformas oficiais de notificação compulsória (SINAN).</p></div>
+    <p class="fonte">Fontes: Nota Informativa nº 3/2025 (CGARB/DEDT/SVSA/MS) e Boletim Epidemiológico nº 11/2024 do Ministério da Saúde.</p>
   </section>
 
   <section id="recursos">
     <h2>O que o app faz</h2>
-    <p class="muted" style="max-width:62ch">Informações que já fazem parte da rotina de controle de endemias, reunidas em uma interface simples para o agente e útil para a gestão.</p>
+    <p class="muted" style="max-width:62ch">Ferramentas robustas desenvolvidas por profissionais da área, reunidas em uma interface ágil tanto para o trabalho de campo quanto para o planejamento gerencial.</p>
 
+    <!-- Recurso 1: Painel Inicial -->
     <article class="recurso">
       <div>
-        <span class="tag">Painel</span>
-        <h3 style="font-size:24px">Tela inicial com o indicador ADL</h3>
-        <p class="muted">Ao abrir o app, o usuário vê o contexto de trabalho e os atalhos principais em uma única tela.</p>
+        <span class="tag">Painel Gerencial</span>
+        <h3 style="font-size:24px">Tela inicial com indicador ADL e atalhos rápidos</h3>
+        <p class="muted">Visão panorâmica imediata para o agente e o coordenador logo ao abrir o aplicativo.</p>
         <ul>
-          <li>Resultados do indicador IIP/ADL por período, em faixas: satisfatório, alerta e risco.</li>
-          <li>Ano vigente e ciclo de trabalho ativo, para contextualizar a leitura dos dados.</li>
-          <li>Atalhos para registro de focos, usuários, notificações e acompanhamento de casos.</li>
+          <li>Cálculo e exibição do índice ADL/IIP por período (faixas de satisfatório, alerta e risco).</li>
+          <li>Identificação clara do ano vigente e ciclo de trabalho ativo.</li>
+          <li>Acesso rápido a focos, usuários, notificações em tempo real e monitoramento de casos.</li>
         </ul>
       </div>
-      <div class="fone"><img src="tela-inicial.jpg" width="600" height="914" loading="lazy" alt="Tela inicial do aplicativo com o índice ADL por período e atalhos para focos, usuários, notificações e casos"></div>
+      <div class="vitrine">
+        <div class="fone">
+          <img src="tela-inicial.jpg" width="600" height="914" loading="lazy" alt="Tela inicial do aplicativo">
+          <i class="mk" style="--l:3%;--t:19%;--w:94%;--h:21%"><b>Indicador ADL por faixa</b></i>
+          <span class="seta" style="--l:78%;--t:45%;--rot:180deg;"></span>
+        </div>
+        <div class="lupa" style="--img:url(tela-inicial.jpg);--k:2.4;--px:50.0%;--py:14.0%;" aria-hidden="true"></div>
+      </div>
     </article>
 
+    <!-- Recurso 2: Mapa de Risco -->
     <article class="recurso inv">
       <div>
-        <span class="tag">Focos</span>
-        <h3 style="font-size:24px">Mapa de risco e focos reincidentes</h3>
-        <p class="muted">Cada foco registrado no campo aparece no mapa do ciclo selecionado, com círculos de raio de 150 metros que mostram a proximidade entre registros.</p>
+        <span class="tag">Geoprocessamento</span>
+        <h3 style="font-size:24px">Mapa de risco e focos reincidentes (raio de 150m)</h3>
+        <p class="muted">Cada foco lançado gera alertas visuais e análise espacial para impedir a proliferação do vetor.</p>
         <ul>
-          <li>Cores por intensidade: um foco, dois ou três, quatro ou mais.</li>
-          <li>Aviso ao agente quando um local volta a apresentar focos em ciclos posteriores.</li>
-          <li>Apoio à priorização de visitas, ações educativas e controle vetorial.</li>
+          <li>Agrupamento inteligente com círculos de raio de 150 metros.</li>
+          <li>Cores por densidade: de 1 foco isolado até áreas de alta concentração (4+ focos).</li>
+          <li>Alerta automático ao agente quando um endereço apresenta reincidência em ciclos subsequentes.</li>
         </ul>
       </div>
-      <div class="fone"><img src="mapa-risco.jpg" width="600" height="960" loading="lazy" alt="Mapa de risco com círculos coloridos indicando a concentração de focos por ciclo"></div>
+      <div class="vitrine">
+        <div class="fone">
+          <img src="mapa-risco.jpg" width="600" height="960" loading="lazy" alt="Mapa de risco de focos">
+          <i class="mk abx" style="--l:2%;--t:1%;--w:57%;--h:5.5%"><b>Focos consolidados no ciclo</b></i>
+          <i class="mk" style="--l:15%;--t:39%;--w:26%;--h:17%;--r:50%"><b>Área de calor / Foco denso</b></i>
+          <span class="seta" style="--l:62%;--t:44%;--rot:0deg;"></span>
+        </div>
+        <div class="lupa" style="--img:url(mapa-risco.jpg);--k:2.6;--px:14.3%;--py:45.9%;" aria-hidden="true"></div>
+      </div>
     </article>
 
+    <!-- Recurso 3: Mapa de Casos -->
     <article class="recurso">
       <div>
-        <span class="tag">Casos</span>
-        <h3 style="font-size:24px">Mapa de casos suspeitos e confirmados</h3>
-        <p class="muted">A localização dos casos registrados ajuda a reconhecer concentrações e a articular as equipes, com raio de busca configurável.</p>
+        <span class="tag">Vigilância Epidemiológica</span>
+        <h3 style="font-size:24px">Mapa de casos suspeitos e confirmados com raio de busca</h3>
+        <p class="muted">Acompanhe a distribuição espacial das arboviroses no município em tempo real.</p>
         <ul>
-          <li>Notificação em tempo real aos usuários quando há novo caso confirmado e sua localidade.</li>
-          <li>Apoio à priorização de áreas, sem substituir a investigação epidemiológica.</li>
+          <li>Notificações push instantâneas para a equipe sempre que um novo caso é confirmado.</li>
+          <li>Raio de busca configurável ao redor da residência do paciente para varredura vetorial direcionada.</li>
         </ul>
       </div>
-      <div class="fone"><img src="mapa-casos.jpg" width="600" height="960" loading="lazy" alt="Mapa epidemiológico com pontos de casos e áreas de busca ao redor"></div>
+      <div class="vitrine">
+        <div class="fone">
+          <img src="mapa-casos.jpg" width="600" height="960" loading="lazy" alt="Mapa de casos">
+          <span class="alerta">🔔 Novo caso confirmado!</span>
+          <i class="mk abx" style="--l:3%;--t:40%;--w:37%;--h:18%;--r:50%"><b>Concentração de casos</b></i>
+          <span class="seta" style="--l:55%;--t:48%;--rot:0deg;"></span>
+        </div>
+        <div class="lupa" style="--img:url(mapa-casos.jpg);--k:2.4;--px:-4.9%;--py:48.3%;" aria-hidden="true"></div>
+      </div>
     </article>
 
+    <!-- Recurso 4: PEIE - Pontos Estratégicos -->
     <article class="recurso inv">
       <div>
-        <span class="tag">Indicadores</span>
-        <h3 style="font-size:24px">Acompanhamento anual e por bairro</h3>
-        <p class="muted">Um comparativo entre casos notificados e confirmados, ano a ano, com o detalhamento por bairro ou região.</p>
+        <span class="tag">PEIE / Imóveis Especiais</span>
+        <h3 style="font-size:24px">Cadastro e Vistoria de Pontos Estratégicos</h3>
+        <p class="muted">Controle rigoroso de ferros-velhos, desmanches, borracharias, cemitérios e grandes depósitos.</p>
         <ul>
-          <li>Ranking de bairros e identificação da maior concentração.</li>
-          <li>Filtros por ano, status e ordenação.</li>
-          <li>Exportação em PDF e PNG para reuniões, relatórios e palestras.</li>
+          <li>Histórico completo de vistorias por estabelecimento.</li>
+          <li>Gestão de tratamentos larvicidas aplicados e pendências encontradas.</li>
+          <li>Geração de relatórios específicos para fiscalização e exigências sanitárias.</li>
         </ul>
       </div>
-      <div class="fone"><img src="comparativo-anual.jpg" width="600" height="405" loading="lazy" alt="Gráfico de barras comparando casos notificados e confirmados por ano"></div>
+      <div class="vitrine">
+        <div class="fone">
+          <img src="reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Tela de controle PEIE">
+          <i class="mk" style="--l:4%;--t:24%;--w:92%;--h:14%"><b>Imóveis de alto risco cadastrados</b></i>
+          <span class="seta" style="--l:48%;--t:42%;--rot:90deg;"></span>
+        </div>
+      </div>
     </article>
 
+    <!-- Recurso 5: Controle de Estoque -->
     <article class="recurso">
       <div>
-        <span class="tag">Reclamações</span>
-        <h3 style="font-size:24px">Registro de reclamações com fotos</h3>
-        <p class="muted">As manifestações dos munícipes ficam em um sistema digital padronizado, no lugar de registros dispersos e de difícil rastreio.</p>
+        <span class="tag">Logística de Insumos</span>
+        <h3 style="font-size:24px">Controle de Estoque de Larvicidas e Equipamentos</h3>
+        <p class="muted">Gestão transparente dos materiais de campo e distribuição para as equipes.</p>
         <ul>
-          <li>Fotos e documentos anexados a cada ocorrência.</li>
-          <li>Acompanhamento do andamento e das pendências.</li>
-          <li>Análise dos assuntos mais frequentes e das regiões com mais ocorrências.</li>
-          <li>Exportação de documentos para encaminhar a outros setores.</li>
+          <li>Controle de entradas e saídas de larvicidas, EPIs e materiais de borrifação.</li>
+          <li>Prevenção de rupturas de estoque durante os períodos de pico de atendimento.</li>
+          <li>Registro de lotes e validade dos produtos utilizados no município.</li>
         </ul>
       </div>
-      <div class="fone larga"><img src="reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Tela do registro de reclamações com opções de registrar, consultar e ver o resumo anual"></div>
+      <div class="vitrine">
+        <div class="fone larga">
+          <img src="reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Controle de estoque">
+          <i class="mk abx" style="--l:4%;--t:61%;--w:92%;--h:14%"><b>Saldo de insumos e distribuição</b></i>
+          <span class="seta" style="--l:48%;--t:55%;--rot:270deg;"></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Recurso 6: Comparativo Anual e Relatórios -->
+    <article class="recurso inv">
+      <div>
+        <span class="tag">Relatórios Executivos</span>
+        <h3 style="font-size:24px">Acompanhamento anual, por bairro e exportação em PDF/PNG</h3>
+        <p class="muted">Dados claros para reuniões com o executivo municipal, conselhos de saúde e secretaria.</p>
+        <ul>
+          <li>Gráficos comparativos de casos notificados vs. confirmados ano a ano.</li>
+          <li>Ranking de bairros com maior incidência para direcionar campanhas educativas.</li>
+          <li>Exportação imediata de relatórios em PDF e gráficos em PNG.</li>
+        </ul>
+      </div>
+      <div class="vitrine">
+        <div class="fone">
+          <img src="comparativo-anual.jpg" width="600" height="405" loading="lazy" alt="Comparativo anual">
+          <i class="mk dir" style="--l:26%;--t:13%;--w:17%;--h:62%"><b>Análise de picos históricos</b></i>
+          <i class="mk abx" style="--l:3%;--t:30%;--w:94%;--h:10%"><b>Exportação PDF e PNG</b></i>
+          <span class="seta" style="--l:45%;--t:22%;--rot:180deg;"></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Recurso 7: Reclamações -->
+    <article class="recurso">
+      <div>
+        <span class="tag">Ouvidoria e Munícipes</span>
+        <h3 style="font-size:24px">Registro de reclamações com fotos e geolocalização</h3>
+        <p class="muted">Centralize as demandas da população em um fluxo digital organizado e auditável.</p>
+        <ul>
+          <li>Anexo de fotografias direto da câmera do celular na ocorrência.</li>
+          <li>Acompanhamento de status (pendente, em andamento, concluído).</li>
+          <li>Estatísticas dos bairros com maior volume de solicitações de limpeza e vistoria.</li>
+        </ul>
+      </div>
+      <div class="vitrine">
+        <div class="fone larga">
+          <img src="reclamacoes.jpg" width="720" height="672" loading="lazy" alt="Tela de reclamações">
+          <i class="mk" style="--l:4%;--t:24%;--w:92%;--h:14%"><b>Registro ágil de ocorrências</b></i>
+          <i class="mk abx" style="--l:4%;--t:61%;--w:92%;--h:14%"><b>Resumo e estatísticas anuais</b></i>
+          <span class="seta" style="--l:48%;--t:35%;--rot:90deg;"></span>
+        </div>
+      </div>
     </article>
   </section>
 
   <section id="ganhos">
-    <h2>O que o município ganha</h2>
+    <h2>O que o município ganha ao adotar a plataforma</h2>
     <div class="ganhos" style="margin-top:28px">
-      <div><h3>Capacidade de antecipação</h3><p>Reconhecer sinais de alerta com maior antecedência e organizar respostas oportunas.</p></div>
-      <div><h3>Direcionamento territorial</h3><p>Priorizar áreas e atividades com base na distribuição dos registros e na avaliação técnica.</p></div>
-      <div><h3>Informação para decidir</h3><p>Dados organizados para apoiar o planejamento da gestão e das equipes.</p></div>
-      <div><h3>Prevenção fortalecida</h3><p>Sair de uma atuação predominantemente reativa para uma prática planejada, contínua e orientada por evidências.</p></div>
+      <div><h3>Capacidade de Antecipação</h3><p>Reconheça sinais precoces de aumento vetorial antes que se transformem em epidemias generalizadas.</p></div>
+      <div><h3>Direcionamento Territorial</h3><p>Aloque equipes de Agentes de Endemias para os quarteirões e imóveis de maior risco comprovado.</p></div>
+      <div><h3>Gestão Baseada em Evidências</h3><p>Substitua planilhas dispersas por painéis unificados com indicadores entomológicos em tempo real.</p></div>
+      <div><h3>Prevenção Proativa</h3><p>Passe de uma atuação estritamente reativa nos surtos para um planejamento contínuo e estruturado.</p></div>
     </div>
   </section>
 
   <section id="futuro">
-    <h2>Para onde o app caminha</h2>
-    <p class="muted" style="max-width:62ch">Perspectivas de evolução. Os itens abaixo ainda não fazem parte da versão atual.</p>
+    <h2>Evolução e Próximos Passos</h2>
+    <p class="muted" style="max-width:62ch">Perspectivas de expansão tecnológica contínua para acompanhar as necessidades da vigilância em saúde.</p>
     <ul class="futuro" style="margin-top:22px">
-      <li><b>Análise temporal ampliada</b>Séries históricas e tendências por bairro, ciclo e período sazonal.</li>
-      <li><b>Indicadores territoriais integrados</b>Leitura conjunta de focos, casos e indicadores entomológicos.</li>
-      <li><b>Apoio à gestão de equipes</b>Distribuição de esforços conforme as evidências do território.</li>
-      <li><b>Relatórios gerenciais</b>Consolidação para reuniões técnicas e prestação de contas.</li>
-      <li><b>Educação em saúde</b>Informações contextualizadas para ações educativas e comunicação com a população.</li>
-      <li><b>Interoperabilidade e governança</b>Integração com bases oficiais e perfis de acesso, conforme viabilidade técnica e normativa.</li>
+      <li><b>Análise temporal ampliada</b>Séries históricas e tendências sazonais comparadas por bairro e ciclo.</li>
+      <li><b>Indicadores integrados</b>Cruzamento automatizado entre focos, casos humanos e dados entomológicos.</li>
+      <li><b>Apoio à gestão de equipes</b>Otimização de rotas de visita domiciliar com base nos mapas de calor.</li>
+      <li><b>Relatórios executivos gerenciais</b>Consolidação automática para prestação de contas e reuniões de conselho.</li>
+      <li><b>Educação em saúde</b>Geração de materiais informativos direcionados para ações comunitárias.</li>
+      <li><b>Interoperabilidade segura</b>Integração com bases oficiais estaduais e federais conforme diretrizes normativas.</li>
     </ul>
-    <div class="nota" style="margin-top:20px"><p>Os mapas e indicadores dependem da qualidade, da atualização e da completude dos registros inseridos. A interpretação deve seguir os protocolos vigentes e a competência das áreas técnicas responsáveis.</p></div>
+    <div class="nota" style="margin-top:20px"><p>A eficácia dos mapas e relatórios depende da qualidade e regularidade dos lançamentos em campo. O aplicativo atua como ferramenta de suporte à decisão técnica e autoridade sanitária competente.</p></div>
   </section>
 
   <section id="contato">
     <div class="autor">
       <div style="flex:1 1 280px">
         <h2 style="font-size:26px">Desenvolvido por Gustavo Leite</h2>
-        <p class="muted">Sanitarista, tecnólogo em Agente Comunitário de Saúde e Endemias e técnico em Vigilância em Saúde.</p>
+        <p class="muted">Sanitarista, Tecnólogo em Agente Comunitário de Saúde e Endemias, e Técnico em Vigilância em Saúde.</p>
       </div>
-      <a class="botao verde js-contato" href="#" hidden>Solicitar apresentação</a>
+      <a class="botao verde js-contato" href="#" hidden>Solicitar apresentação para o município</a>
     </div>
   </section>
 
   <section id="baixar">
     <div class="app">
       <div>
-        <h2>Já usa o app? Baixe ou atualize</h2>
-        <p class="muted">Disponível para Android, com instalação direta pelo arquivo APK. Ao abrir, o app avisa quando existe versão nova.</p>
-        <div class="botoes"><a class="botao verde" href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases/latest/download/Endemias.apk">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>Baixar APK</a></div>
-        <span class="pilula" id="versao">Somente para Android</span>
+        <h2>Equipes municipais: baixe ou atualize o app</h2>
+        <p class="muted">Disponível para dispositivos Android. O sistema avisa automaticamente quando há novas atualizações disponíveis.</p>
+        <div class="botoes">
+          <a class="botao verde" href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases/latest/download/Endemias.apk">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>Baixar APK do App
+          </a>
+        </div>
+        <span class="pilula" id="versao">Compatível com Android</span>
       </div>
       <div>
         <ol class="passos">
-          <li>Toque em <strong>Baixar APK</strong> e espere o download terminar.</li>
-          <li>Abra o <strong>Endemias.apk</strong> pela notificação ou pela pasta Downloads.</li>
-          <li>Se o Android bloquear, toque em <strong>Configurações</strong> e ative <strong>Permitir desta fonte</strong>.</li>
-          <li>Toque em <strong>Instalar</strong> e depois em <strong>Abrir</strong>.</li>
+          <li>Toque em <strong>Baixar APK</strong> e aguarde o término do download.</li>
+          <li>Abra o arquivo <strong>Endemias.apk</strong> pela barra de notificações ou pasta de Downloads.</li>
+          <li>Se o Android solicitar permissão de segurança, selecione <strong>Configurações</strong> e ative <strong>Permitir desta fonte</strong>.</li>
+          <li>Toque em <strong>Instalar</strong> e em seguida em <strong>Abrir</strong>.</li>
         </ol>
         <details>
-          <summary>Apareceu um aviso de segurança?</summary>
-          <p>É esperado: o app não está na Play Store, então o Android pede confirmação. Toque em Mais detalhes e depois em Instalar mesmo assim.</p>
+          <summary>Dúvida sobre o aviso de segurança do Android?</summary>
+          <p>É um procedimento padrão do sistema para aplicativos instalados fora da Google Play Store. Basta tocar em "Mais detalhes" e em "Instalar mesmo assim". O aplicativo é seguro e auditado.</p>
         </details>
       </div>
     </div>
   </section>
 
   <footer>
-    <img src="icone-app.png" width="40" height="40" alt="" style="display:inline-block;vertical-align:middle;border-radius:10px;margin-right:10px">Combate às Endemias · A tecnologia apoia, e não substitui, a atuação dos profissionais, a investigação epidemiológica e a decisão da autoridade sanitária ·
-    <a href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases">Todas as versões</a>
+    <img src="icone-app.png" width="40" height="40" alt="" style="display:inline-block;vertical-align:middle;border-radius:10px;margin-right:10px">Combate às Endemias · A tecnologia apoia, sem substituir, a atuação profissional, a investigação epidemiológica e a decisão soberana da autoridade sanitária municipal ·
+    <a href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases">Histórico de versões</a>
   </footer>
 </main>
 
 <script>
-  // Coloque aqui o contato para os municípios (ex.: "mailto:seu@email.com" ou "https://wa.me/55DDDNUMERO").
-  // Enquanto estiver vazio, os botões de contato ficam escondidos.
-  var CONTATO = "mailto:gusleite99@gmail.com?subject=Interesse%20no%20app%20Combate%20%C3%A0s%20Endemias";
+  // Insira o e-mail ou WhatsApp de contato para os municípios de SP:
+  var CONTATO = "mailto:gusleite99@gmail.com?subject=Interesse%20no%20app%20Combate%20%C3%A0s%20Endemias%20para%20o%20Munic%C3%pio";
 
   (function () {
     if (CONTATO) {

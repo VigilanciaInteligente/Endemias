@@ -183,7 +183,7 @@
       <p class="sub">Plataforma e aplicativo móvel de apoio à vigilância em saúde que transforma o trabalho de campo em mapas de calor, indicadores entomológicos e controle estratégico para evitar epidemias e internações.</p>
       <div class="botoes">
         <a class="botao" href="#recursos">Ver Recursos do App</a>
-        <a class="botao alt js-contato" href="#contato" hidden>Apresentação para Gestores</a>
+        <a class="botao alt js-contato" href="#" hidden>Solicitar Apresentação</a>
       </div>
     </div>
     <div class="hero-arte"><img src="capa-conexoes.png" width="920" height="951" alt="Ícone oficial do aplicativo Combate às Endemias"></div>
@@ -289,7 +289,7 @@
       </div>
     </article>
 
-    <!-- Recurso 3: Mapa de Casos (Atualizado com acesso em tempo real a notificados, confirmados e descartados + push) -->
+    <!-- Recurso 3: Mapa de Casos (Atualizado com acesso em tempo real a notificados, confirmados, descartados e push) -->
     <article class="recurso">
       <div>
         <span class="tag">Vigilância Epidemiológica</span>
@@ -471,24 +471,24 @@
     </div>
   </section>
 
-  <!-- Baixar APK -->
+  <!-- Baixar APK (Botão inativo: Disponível em breve) -->
   <section id="baixar">
     <div class="app-grid">
       <div>
         <h2>Baixe ou atualize o aplicativo</h2>
         <p class="muted">Disponível para dispositivos Android. O sistema avisa automaticamente quando uma nova versão é publicada.</p>
         <div class="botoes">
-          <a class="botao verde" href="https://github.com/GustavoLeiteve/EndemiasCruzeiro/releases/latest/download/Endemias.apk">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>Baixar APK Atualizado
+          <a class="botao verde" href="#" style="background:var(--muted); opacity:0.65; cursor:not-allowed; box-shadow:none;" onclick="event.preventDefault(); alert('O aplicativo estará disponível para download público em breve.');" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>Baixar APK
           </a>
         </div>
-        <span class="pilula" id="versao">Compatível com Android</span>
+        <span class="pilula" style="background:#fef3c7; color:#b45309; border-color:#f59e0b;">Disponível em breve · Android</span>
       </div>
       <div>
         <ol class="passos">
           <li>Toque em <strong>Baixar APK</strong> e aguarde o término do download.</li>
           <li>Abra o arquivo <strong>Endemias.apk</strong> na barra de notificações ou pasta de Downloads.</li>
-          <li>Se o Android solicitar confirmação de segurança, toque em <strong>Configurações</strong> e ative <strong>Permitir desta fonte</strong>.</li>
+          <li>Se o Android solicitar confirmação de segurança, toque em <strong>Configurações</strong> e ative ️ <strong>Permitir desta fonte</strong>.</li>
           <li>Toque em <strong>Instalar</strong> e em seguida em <strong>Abrir</strong>.</li>
         </ol>
         <details>
@@ -511,19 +511,51 @@
   </footer>
 </main>
 
+<!-- Modal de Solicitação de Apresentação / Cópia de E-mail -->
+<div id="modal-contato" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px);">
+  <div style="background:var(--card-bg); border:1px solid var(--line); border-radius:24px; padding:32px; max-width:440px; width:100%; box-shadow:0 24px 48px rgba(0,0,0,0.3); text-align:center; position:relative;">
+    <h3 style="font-size:24px; margin-bottom:12px; color:var(--green);">Solicitar Apresentação</h3>
+    <p class="muted" style="margin-bottom:24px; font-size:16px;">Entre em contato com o desenvolvedor para levar a plataforma ao seu município:</p>
+    <div style="background:var(--tint); border:1px solid var(--line); border-radius:12px; padding:14px; font-size:18px; font-weight:700; margin-bottom:24px; user-select:all; color:var(--ink);">
+      gusleite99@gmail.com
+    </div>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <button onclick="copiarEmail()" class="botao verde" style="cursor:pointer; border:none;">Copiar E-mail</button>
+      <button onclick="fecharModal()" class="botao alt" style="background:var(--tint); color:var(--ink); border:1px solid var(--line); cursor:pointer;">Fechar</button>
+    </div>
+    <div id="msg-copiado" style="margin-top:12px; font-size:14px; color:var(--green); font-weight:700; opacity:0; transition:opacity 0.2s;">E-mail copiado para a área de transferência!</div>
+  </div>
+</div>
+
 <script>
-  // Insira o e-mail ou WhatsApp de contato para os municípios:
-  var CONTATO = "mailto:gusleite99@gmail.com?subject=Interesse%20no%20app%20Combate%20%C3%A0s%20Endemias%20para%20o%20Munic%C3%pio";
+  var EMAIL_CONTATO = "gusleite99@gmail.com";
+
+  function abrirModal(e) {
+    e.preventDefault();
+    document.getElementById("modal-contato").style.display = "flex";
+  }
+
+  function fecharModal() {
+    document.getElementById("modal-contato").style.display = "none";
+    document.getElementById("msg-copiado").style.opacity = "0";
+  }
+
+  function copiarEmail() {
+    navigator.clipboard.writeText(EMAIL_CONTATO).then(function() {
+      var msg = document.getElementById("msg-copiado");
+      msg.style.opacity = "1";
+      setTimeout(function() {
+        msg.style.opacity = "0";
+      }, 3000);
+    });
+  }
 
   (function () {
-    if (CONTATO) {
-      document.querySelectorAll(".js-contato").forEach(function (a) { a.href = CONTATO; a.hidden = false; });
-    }
-    var el = document.getElementById("versao");
-    fetch("versao.json?t=" + Date.now())
-      .then(function (r) { return r.json(); })
-      .then(function (v) { if (v && v.versionName) { el.textContent = "Versão " + v.versionName + " · Android"; } })
-      .catch(function () {});
+    document.querySelectorAll(".js-contato").forEach(function (a) { 
+      a.href = "#"; 
+      a.hidden = false;
+      a.addEventListener("click", abrirModal);
+    });
   })();
 </script>
 </body>

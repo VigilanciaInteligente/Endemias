@@ -37,6 +37,8 @@
   .marca img { width:46px; height:46px; border-radius:12px; }
   .topo nav { display:none; gap:26px; font-size:16px; }
   @media (min-width:700px) { .topo nav { display:flex; } }
+  .hero-arte { order:-1; max-width:300px; margin:0 auto; }
+  .hero-arte img { width:100%; height:auto; filter:drop-shadow(0 22px 40px rgba(0,0,0,.3)); }
   .logo-grande { width:156px; height:156px; margin-bottom:26px; filter:drop-shadow(0 18px 30px rgba(0,0,0,.4)); }
   .passos3 { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:26px; counter-reset:n; }
   .passo3 { counter-increment:n; background:var(--tint); border-radius:18px; padding:24px 22px; }
@@ -68,7 +70,8 @@
   .recurso li { margin-bottom:6px; }
   .recurso .tag { display:inline-block; font-size:14px; font-weight:700; color:var(--green); background:var(--tint); border-radius:999px; padding:3px 12px; margin-bottom:12px; }
   @media (min-width:820px) {
-    .hero > .wrap { grid-template-columns:1.15fr .85fr; }
+    .hero > .wrap { grid-template-columns:1fr 1fr; }
+    .hero-arte { order:0; max-width:480px; }
     .recurso { grid-template-columns:1fr 1fr; gap:64px; }
     .recurso.inv .fone { order:-1; }
   }
@@ -106,7 +109,6 @@
   </div>
   <div class="wrap">
     <div>
-      <img class="logo-grande" src="icone-app.png" width="300" height="300" alt="Ícone oficial do aplicativo Combate às Endemias">
       <h1>Da resposta à prevenção: dados para decidir, território para agir.</h1>
       <p class="sub">Um aplicativo de apoio à vigilância em saúde que transforma registros de campo em mapas, indicadores e comparativos para orientar as equipes do município.</p>
       <div class="botoes">
@@ -114,7 +116,7 @@
         <a class="botao alt js-contato" href="#contato" hidden>Quero para meu município</a>
       </div>
     </div>
-    <div class="fone"><img src="tela-inicial.jpg" width="600" height="914" alt="Tela inicial do aplicativo com o índice ADL por período e atalhos para focos, usuários, notificações e casos"></div>
+    <div class="hero-arte"><img src="capa-conexoes.png" width="920" height="951" alt="Ícone oficial do aplicativo Combate às Endemias, ao centro de um chip com conexões ao redor"></div>
   </div>
 </header>
 
@@ -148,6 +150,20 @@
 
     <article class="recurso">
       <div>
+        <span class="tag">Painel</span>
+        <h3 style="font-size:24px">Tela inicial com o indicador ADL</h3>
+        <p class="muted">Ao abrir o app, o usuário vê o contexto de trabalho e os atalhos principais em uma única tela.</p>
+        <ul>
+          <li>Resultados do indicador IIP/ADL por período, em faixas: satisfatório, alerta e risco.</li>
+          <li>Ano vigente e ciclo de trabalho ativo, para contextualizar a leitura dos dados.</li>
+          <li>Atalhos para registro de focos, usuários, notificações e acompanhamento de casos.</li>
+        </ul>
+      </div>
+      <div class="fone"><img src="tela-inicial.jpg" width="600" height="914" loading="lazy" alt="Tela inicial do aplicativo com o índice ADL por período e atalhos para focos, usuários, notificações e casos"></div>
+    </article>
+
+    <article class="recurso inv">
+      <div>
         <span class="tag">Focos</span>
         <h3 style="font-size:24px">Mapa de risco e focos reincidentes</h3>
         <p class="muted">Cada foco registrado no campo aparece no mapa do ciclo selecionado, com círculos de raio de 150 metros que mostram a proximidade entre registros.</p>
@@ -160,7 +176,7 @@
       <div class="fone"><img src="mapa-risco.jpg" width="600" height="960" loading="lazy" alt="Mapa de risco com círculos coloridos indicando a concentração de focos por ciclo"></div>
     </article>
 
-    <article class="recurso inv">
+    <article class="recurso">
       <div>
         <span class="tag">Casos</span>
         <h3 style="font-size:24px">Mapa de casos suspeitos e confirmados</h3>
@@ -173,7 +189,7 @@
       <div class="fone"><img src="mapa-casos.jpg" width="600" height="960" loading="lazy" alt="Mapa epidemiológico com pontos de casos e áreas de busca ao redor"></div>
     </article>
 
-    <article class="recurso">
+    <article class="recurso inv">
       <div>
         <span class="tag">Indicadores</span>
         <h3 style="font-size:24px">Acompanhamento anual e por bairro</h3>
@@ -187,7 +203,7 @@
       <div class="fone"><img src="comparativo-anual.jpg" width="600" height="405" loading="lazy" alt="Gráfico de barras comparando casos notificados e confirmados por ano"></div>
     </article>
 
-    <article class="recurso inv">
+    <article class="recurso">
       <div>
         <span class="tag">Reclamações</span>
         <h3 style="font-size:24px">Registro de reclamações com fotos</h3>

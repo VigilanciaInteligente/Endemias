@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#051b24">
-<meta name="description" content="SIVI - Sistema Inteligente de Vigilância: inteligência territorial em vigilância em saúde para municípios do estado de São Paulo, alerta MS 2026/2027, El Niño, mapas de focos, casos, PEIE, controle de estoque e redução de custos com internações.">
-<link rel="icon" type="image/png" href="icone-180.png">
-<link rel="apple-touch-icon" href="icone-180.png">
+<meta name="description" content="SIVI - Sistema Inteligente de Vigilância: inteligência territorial em vigilância em saúde para municípios do estado de São Paulo, alerta 2026/2027, El Niño, mapas de focos, casos, PEIE, controle de estoque e redução de custos com internações.">
+<link rel="icon" type="image/png" href="emblema-sivi.png">
+<link rel="apple-touch-icon" href="emblema-sivi.png">
 <title>SIVI – Sistema Inteligente de Vigilância em Saúde</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,12 +62,12 @@
   .muted { color:var(--muted); }
   section { padding:84px 0 0; }
 
-  /* Hero Futurista com Neon e Conexões de Chips */
+  /* Hero Futurista Centralizado */
   .hero {
     position:relative;
     background:
-      radial-gradient(circle at 50% 22%, rgba(0,210,255,0.22), transparent 48%),
-      radial-gradient(circle at 50% 34%, rgba(56,242,179,0.16), transparent 56%),
+      radial-gradient(circle at 50% 24%, rgba(0,210,255,0.22), transparent 48%),
+      radial-gradient(circle at 50% 42%, rgba(56,242,179,0.16), transparent 56%),
       linear-gradient(rgba(0,210,255,0.06) 1px, transparent 1px),
       linear-gradient(90deg, rgba(56,242,179,0.06) 1px, transparent 1px),
       linear-gradient(160deg,#03121a 0%,#06282e 48%,#0a4a3c 100%);
@@ -87,7 +87,7 @@
     gap:16px;
     padding-bottom:20px;
     border-bottom:1px solid rgba(0,210,255,0.18);
-    margin-bottom:24px;
+    margin-bottom:28px;
   }
   .topo a { color:#d5ece3; text-decoration:none; font-weight:700; transition:color .2s, text-shadow .2s; }
   .topo a:hover { color:#38f2b3; text-shadow:0 0 12px rgba(56,242,179,0.6); }
@@ -101,28 +101,31 @@
   .topo nav { display:none; gap:26px; font-size:16px; }
   @media (min-width:768px) { .topo nav { display:flex; } }
 
-  /* Novo Emblema Centralizado Sem Fundo (formato original do emblema-sivi-2027.png) */
+  /* Novo Emblema Centralizado Sem Fundo */
   .emblema-topo {
     display:flex;
     flex-direction:column;
     align-items:center;
     text-align:center;
-    margin:6px auto 26px;
+    margin:0 auto 24px;
     position:relative;
   }
-  .emblema-box {
+  .emblema-moldura {
     position:relative;
-    width:clamp(250px, 40vw, 350px);
+    width:clamp(210px, 32vw, 270px);
+    aspect-ratio:1 / 1;
     display:grid;
     place-items:center;
+    overflow:hidden;
+    border-radius:28px;
     isolation:isolate;
   }
-  .emblema-box::before {
+  .emblema-moldura::before {
     content:"";
     position:absolute;
-    inset:8%;
-    border-radius:24px;
-    background:radial-gradient(circle, rgba(0,210,255,0.32) 0%, rgba(56,242,179,0.16) 55%, transparent 78%);
+    inset:10%;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(0,210,255,0.34) 0%, rgba(56,242,179,0.18) 55%, transparent 78%);
     filter:blur(20px);
     z-index:-1;
     animation:pulsoNeon 4s ease-in-out infinite alternate;
@@ -131,28 +134,45 @@
     from { opacity:0.75; transform:scale(0.96); }
     to   { opacity:1; transform:scale(1.04); }
   }
-  .emblema-topo img {
+  .emblema-moldura img {
     width:100%;
-    height:auto;
+    height:100%;
     object-fit:contain;
+    transform:scale(1.48);
     background:transparent;
-    mix-blend-mode:lighten;
-    filter:contrast(1.14) saturate(1.14) drop-shadow(0 0 18px rgba(0,210,255,0.45));
+    mix-blend-mode:multiply;
+    filter:contrast(1.12) saturate(1.12) drop-shadow(0 0 16px rgba(0,210,255,0.45));
     transition:transform .35s ease, filter .35s ease;
   }
-  .emblema-topo img:hover {
-    transform:scale(1.03);
-    filter:contrast(1.16) saturate(1.2) drop-shadow(0 0 28px rgba(56,242,179,0.68));
+  @media (prefers-color-scheme: dark) {
+    .emblema-moldura img {
+      mix-blend-mode:screen;
+      filter:invert(1) hue-rotate(180deg) contrast(1.12) saturate(1.15) drop-shadow(0 0 18px rgba(0,210,255,0.5));
+    }
+  }
+  .emblema-moldura:hover img {
+    transform:scale(1.53);
   }
 
-  /* Destaque SIVI com Luzes Neon e Conexões de Chips */
+  /* Conteúdo Centralizado do Hero */
+  .hero-centro {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    max-width:780px;
+    margin:0 auto;
+  }
+
+  /* Nome SIVI Centralizado com Luzes Neon e Conexões de Chips */
   .sivi-destaque {
     position:relative;
     display:inline-flex;
     flex-direction:column;
     align-items:center;
-    padding:18px 32px 20px;
-    margin:0 auto 20px;
+    justify-content:center;
+    padding:18px 34px 20px;
+    margin:0 auto 24px;
     border-radius:20px;
     background:rgba(3,18,26,0.72);
     border:1px solid rgba(0,210,255,0.45);
@@ -226,18 +246,10 @@
     text-shadow:0 0 12px rgba(0,210,255,0.55);
   }
 
-  .hero-corpo { display:grid; gap:44px; align-items:center; margin-top:4px; }
-  .hero-arte { order:-1; max-width:320px; margin:0 auto; }
-  .hero-arte img {
-    width:100%;
-    height:auto;
-    border-radius:24px;
-    filter:drop-shadow(0 0 24px rgba(0,210,255,0.22)) drop-shadow(0 24px 40px rgba(0,0,0,.4));
-  }
-  .sub { font-size:19px; line-height:1.55; color:#d5ece3; max-width:44ch; margin-bottom:28px; }
+  .sub { font-size:19px; line-height:1.55; color:#d5ece3; max-width:54ch; margin:0 auto 28px; }
 
   /* Botões */
-  .botoes { display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+  .botoes { display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; }
   .botao {
     display:inline-flex; align-items:center; justify-content:center; gap:10px;
     text-decoration:none; font-weight:700; font-size:17px; padding:15px 28px;
@@ -281,8 +293,6 @@
   .recurso li { margin-bottom:8px; font-size:17px; }
   .recurso .tag { display:inline-block; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--green); background:var(--tint); border:1px solid var(--line); border-radius:999px; padding:4px 14px; margin-bottom:14px; }
   @media (min-width:860px) {
-    .hero-corpo { grid-template-columns:1.15fr 0.85fr; gap:48px; }
-    .hero-arte { order:0; max-width:440px; }
     .recurso { grid-template-columns:1.1fr 0.9fr; gap:64px; }
     .recurso.inv .fone-col { order:-1; }
   }
@@ -337,9 +347,9 @@
 
   @media (prefers-reduced-motion:reduce) {
     html { scroll-behavior:auto; }
-    .botao, .emblema-topo img { transition:none; }
-    .botao:hover, .emblema-topo img:hover { transform:none; }
-    .emblema-box::before { animation:none; }
+    .botao, .emblema-moldura img { transition:none; }
+    .botao:hover, .emblema-moldura:hover img { transform:scale(1.48); }
+    .emblema-moldura::before { animation:none; }
   }
 </style>
 </head>
@@ -359,49 +369,44 @@
 
     <!-- Novo Emblema Centralizado Sem Fundo -->
     <div class="emblema-topo">
-      <div class="emblema-box">
-        <img src="emblema-sivi-2027.png" alt="Emblema oficial do SIVI - Sistema Inteligente de Vigilância">
+      <div class="emblema-moldura">
+        <img src="emblema-sivi.png" alt="Emblema do SIVI - Sistema Inteligente de Vigilância">
       </div>
     </div>
 
-    <div class="hero-corpo">
-      <div>
-        <!-- Nome em Ênfase com Luzes Neon e Conexões de Chips -->
-        <div class="sivi-destaque" aria-label="SIVI - Sistema Inteligente de Vigilância">
-          <svg class="chip-circuito" viewBox="0 0 600 140" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="siviNeonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#00d2ff" />
-                <stop offset="50%" stop-color="#38f2b3" />
-                <stop offset="100%" stop-color="#00d2ff" />
-              </linearGradient>
-            </defs>
-            <path class="chip-trilha" d="M 12 24 H 110 L 136 46 H 225 L 245 24 H 355 L 375 46 H 464 L 490 24 H 588" />
-            <path class="chip-trilha" d="M 24 114 H 145 L 172 92 H 428 L 455 114 H 576" />
-            <path class="chip-trilha" d="M 185 46 V 92 M 300 24 V 92 M 415 46 V 92" />
-            <circle class="chip-pino" cx="12" cy="24" r="3.5" />
-            <circle class="chip-pino" cx="588" cy="24" r="3.5" />
-            <circle class="chip-pino" cx="24" cy="114" r="3.5" />
-            <circle class="chip-pino" cx="576" cy="114" r="3.5" />
-            <circle class="chip-pino" cx="185" cy="92" r="3" />
-            <circle class="chip-pino" cx="300" cy="92" r="3.5" />
-            <circle class="chip-pino" cx="415" cy="92" r="3" />
-          </svg>
-          <div class="sivi-sigla">
-            <span>S</span><span>I</span><span>V</span><span>I</span>
-          </div>
-          <div class="sivi-nome-completo">Sistema Inteligente de Vigilância</div>
+    <!-- Nome e Chamada Centralizados -->
+    <div class="hero-centro">
+      <div class="sivi-destaque" aria-label="SIVI - Sistema Inteligente de Vigilância">
+        <svg class="chip-circuito" viewBox="0 0 600 140" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="siviNeonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00d2ff" />
+              <stop offset="50%" stop-color="#38f2b3" />
+              <stop offset="100%" stop-color="#00d2ff" />
+            </linearGradient>
+          </defs>
+          <path class="chip-trilha" d="M 12 24 H 110 L 136 46 H 225 L 245 24 H 355 L 375 46 H 464 L 490 24 H 588" />
+          <path class="chip-trilha" d="M 24 114 H 145 L 172 92 H 428 L 455 114 H 576" />
+          <path class="chip-trilha" d="M 185 46 V 92 M 300 24 V 92 M 415 46 V 92" />
+          <circle class="chip-pino" cx="12" cy="24" r="3.5" />
+          <circle class="chip-pino" cx="588" cy="24" r="3.5" />
+          <circle class="chip-pino" cx="24" cy="114" r="3.5" />
+          <circle class="chip-pino" cx="576" cy="114" r="3.5" />
+          <circle class="chip-pino" cx="185" cy="92" r="3" />
+          <circle class="chip-pino" cx="300" cy="92" r="3.5" />
+          <circle class="chip-pino" cx="415" cy="92" r="3" />
+        </svg>
+        <div class="sivi-sigla">
+          <span>S</span><span>I</span><span>V</span><span>I</span>
         </div>
-
-        <h1>Da resposta tardia à prevenção baseada em dados: proteja seu município em 2027.</h1>
-        <p class="sub">Plataforma e aplicativo móvel de apoio à vigilância em saúde que transforma o trabalho de campo em mapas de calor, indicadores entomológicos e controle estratégico para evitar epidemias e internações.</p>
-        <div class="botoes">
-          <a class="botao" href="#recursos">Ver Recursos do SIVI</a>
-          <a class="botao alt js-contato" href="#" hidden>Solicitar Apresentação</a>
-        </div>
+        <div class="sivi-nome-completo">Sistema Inteligente de Vigilância</div>
       </div>
-      <div class="hero-arte">
-        <img src="capa-conexoes.png" width="920" height="951" alt="Visualização de inteligência territorial e conexões do aplicativo SIVI">
+
+      <h1>Da resposta tardia à prevenção baseada em dados: proteja seu município em 2027.</h1>
+      <p class="sub">Plataforma e aplicativo móvel de apoio à vigilância em saúde que transforma o trabalho de campo em mapas de calor, indicadores entomológicos e controle estratégico para evitar epidemias e internações.</p>
+      <div class="botoes">
+        <a class="botao" href="#recursos">Ver Recursos do SIVI</a>
+        <a class="botao alt js-contato" href="#" hidden>Solicitar Apresentação</a>
       </div>
     </div>
   </div>
@@ -409,7 +414,7 @@
 
 <main class="wrap">
 
-  <!-- Seção Alerta MS 2026/2027, El Niño e Impacto Orçamentário -->
+  <!-- Seção Alerta 2026/2027, El Niño e Impacto Orçamentário -->
   <section id="contexto">
     <h2>Alerta 2026/2027: Ministério da Saúde, El Niño e Risco de Explosão de Casos</h2>
     <p class="muted" style="max-width:74ch">O Ministério da Saúde emitiu alerta (Nota Informativa nº 10/2026) sobre a possibilidade de aumento de arboviroses no período 2026/2027 devido ao El Niño, com risco de agravamento nos primeiros meses de 2027. Projeções científicas e cenários climáticos reforçam o sinal de atenção para os municípios:</p>

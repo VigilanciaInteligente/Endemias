@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#072b22">
-<meta name="description" content="SIVI - Sistema Inteligente de Vigilância: inteligência territorial em vigilância em saúde para municípios do estado de São Paulo, prevenção ao Super El Niño, mapas de focos, casos, PEIE, controle de estoque e redução de custos com internações.">
+<meta name="theme-color" content="#051b24">
+<meta name="description" content="SIVI - Sistema Inteligente de Vigilância: inteligência territorial em vigilância em saúde para municípios do estado de São Paulo, alerta MS 2026/2027, El Niño, mapas de focos, casos, PEIE, controle de estoque e redução de custos com internações.">
 <link rel="icon" type="image/png" href="icone-180.png">
 <link rel="apple-touch-icon" href="icone-180.png">
 <title>SIVI – Sistema Inteligente de Vigilância em Saúde</title>
@@ -20,7 +20,8 @@
     --green-ink:#fff;
     --mint:#4fc19b;
     --neon:#38f2b3;
-    --cyan:#38bdf8;
+    --cyan:#00d2ff;
+    --blue-neon:#1d8cf8;
     --line:#d0dad3;
     --tint:#e3eee8;
     --focus:#e0a800;
@@ -65,25 +66,17 @@
   .hero {
     position:relative;
     background:
-      radial-gradient(circle at 50% 18%, rgba(56,242,179,0.22), transparent 48%),
-      radial-gradient(circle at 85% 75%, rgba(56,189,248,0.14), transparent 45%),
-      linear-gradient(rgba(56,242,179,0.06) 1px, transparent 1px),
+      radial-gradient(circle at 50% 22%, rgba(0,210,255,0.22), transparent 48%),
+      radial-gradient(circle at 50% 34%, rgba(56,242,179,0.16), transparent 56%),
+      linear-gradient(rgba(0,210,255,0.06) 1px, transparent 1px),
       linear-gradient(90deg, rgba(56,242,179,0.06) 1px, transparent 1px),
-      linear-gradient(155deg,#041d17 0%,#083d30 52%,#0c5945 100%);
+      linear-gradient(160deg,#03121a 0%,#06282e 48%,#0a4a3c 100%);
     background-size:auto, auto, 32px 32px, 32px 32px, auto;
     color:#fff;
     border-radius:0 0 38px 38px;
-    padding:36px 0 76px;
+    padding:32px 0 76px;
     overflow:hidden;
-    box-shadow:0 22px 60px rgba(4,29,23,0.35);
-  }
-  .hero::before {
-    content:"";
-    position:absolute;
-    inset:-20% -10%;
-    background:radial-gradient(ellipse at center, rgba(56,242,179,0.12) 0%, transparent 65%);
-    pointer-events:none;
-    z-index:0;
+    box-shadow:0 22px 60px rgba(3,18,26,0.42);
   }
   .hero > .wrap { position:relative; z-index:2; }
 
@@ -92,38 +85,64 @@
     align-items:center;
     justify-content:space-between;
     gap:16px;
-    padding-bottom:24px;
-    border-bottom:1px solid rgba(56,242,179,0.18);
-    margin-bottom:28px;
+    padding-bottom:20px;
+    border-bottom:1px solid rgba(0,210,255,0.18);
+    margin-bottom:24px;
   }
   .topo a { color:#d5ece3; text-decoration:none; font-weight:700; transition:color .2s, text-shadow .2s; }
-  .topo a:hover { color:#38f2b3; text-shadow:0 0 12px rgba(56,242,179,0.55); }
-  .marca { display:flex; align-items:center; gap:12px; color:#fff !important; font-size:18px; letter-spacing:-.01em; }
-  .marca img { width:40px; height:40px; border-radius:11px; box-shadow:0 0 16px rgba(56,242,179,0.35); }
+  .topo a:hover { color:#38f2b3; text-shadow:0 0 12px rgba(56,242,179,0.6); }
+  .marca { display:inline-flex; align-items:center; gap:10px; color:#fff !important; font-size:19px; letter-spacing:0.04em; }
+  .marca-ponto {
+    width:11px; height:11px; border-radius:50%;
+    background:#38f2b3;
+    box-shadow:0 0 10px #38f2b3, 0 0 20px #00d2ff;
+    display:inline-block;
+  }
   .topo nav { display:none; gap:26px; font-size:16px; }
   @media (min-width:768px) { .topo nav { display:flex; } }
 
-  /* Emblema Centralizado Sem Fundo */
+  /* Novo Emblema Centralizado Sem Fundo (formato original do emblema-sivi-2027.png) */
   .emblema-topo {
     display:flex;
     flex-direction:column;
     align-items:center;
     text-align:center;
-    margin-bottom:28px;
+    margin:6px auto 26px;
+    position:relative;
+  }
+  .emblema-box {
+    position:relative;
+    width:clamp(250px, 40vw, 350px);
+    display:grid;
+    place-items:center;
+    isolation:isolate;
+  }
+  .emblema-box::before {
+    content:"";
+    position:absolute;
+    inset:8%;
+    border-radius:24px;
+    background:radial-gradient(circle, rgba(0,210,255,0.32) 0%, rgba(56,242,179,0.16) 55%, transparent 78%);
+    filter:blur(20px);
+    z-index:-1;
+    animation:pulsoNeon 4s ease-in-out infinite alternate;
+  }
+  @keyframes pulsoNeon {
+    from { opacity:0.75; transform:scale(0.96); }
+    to   { opacity:1; transform:scale(1.04); }
   }
   .emblema-topo img {
-    width:clamp(96px, 16vw, 136px);
+    width:100%;
     height:auto;
+    object-fit:contain;
     background:transparent;
-    border:none;
-    border-radius:0;
-    box-shadow:none;
-    filter:drop-shadow(0 0 22px rgba(56,242,179,0.45)) drop-shadow(0 10px 24px rgba(0,0,0,0.45));
-    transition:transform .3s ease, filter .3s ease;
+    mix-blend-mode:lighten;
+    filter:contrast(1.14) saturate(1.14) drop-shadow(0 0 18px rgba(0,210,255,0.45));
+    transition:transform .35s ease, filter .35s ease;
   }
   .emblema-topo img:hover {
-    transform:translateY(-3px) scale(1.03);
-    filter:drop-shadow(0 0 30px rgba(56,242,179,0.72)) drop-shadow(0 12px 28px rgba(0,0,0,0.5));
+    transform:scale(1.03);
+    filter:contrast(1.16) saturate(1.2) drop-shadow(0 0 28px rgba(56,242,179,0.68));
   }
 
   /* Destaque SIVI com Luzes Neon e Conexões de Chips */
@@ -132,14 +151,15 @@
     display:inline-flex;
     flex-direction:column;
     align-items:center;
-    padding:18px 28px 20px;
-    margin:0 auto 14px;
+    padding:18px 32px 20px;
+    margin:0 auto 20px;
     border-radius:20px;
-    background:rgba(4,24,19,0.58);
-    border:1px solid rgba(56,242,179,0.35);
+    background:rgba(3,18,26,0.72);
+    border:1px solid rgba(0,210,255,0.45);
     box-shadow:
-      0 0 24px rgba(56,242,179,0.22),
-      inset 0 0 24px rgba(56,242,179,0.08);
+      0 0 28px rgba(0,210,255,0.28),
+      0 0 48px rgba(56,242,179,0.18),
+      inset 0 0 24px rgba(0,210,255,0.12);
     backdrop-filter:blur(8px);
   }
   .chip-circuito {
@@ -153,31 +173,31 @@
   .chip-trilha {
     fill:none;
     stroke:url(#siviNeonGrad);
-    stroke-width:1.75;
+    stroke-width:1.85;
     stroke-linecap:round;
     stroke-linejoin:round;
-    filter:drop-shadow(0 0 6px rgba(56,242,179,0.75));
+    filter:drop-shadow(0 0 6px rgba(0,210,255,0.85));
   }
   .chip-pino {
     fill:#38f2b3;
-    filter:drop-shadow(0 0 7px #38f2b3);
+    filter:drop-shadow(0 0 7px #00d2ff);
   }
   .sivi-sigla {
     position:relative;
     z-index:2;
-    font-size:clamp(34px, 6.2vw, 58px);
+    font-size:clamp(36px, 6.4vw, 60px);
     font-weight:700;
-    letter-spacing:0.14em;
+    letter-spacing:0.16em;
     line-height:1;
-    color:#e9fff7;
+    color:#f0fbff;
     text-shadow:
-      0 0 10px rgba(56,242,179,0.9),
-      0 0 26px rgba(56,242,179,0.55),
-      0 0 46px rgba(56,189,248,0.35);
+      0 0 10px rgba(0,210,255,0.95),
+      0 0 24px rgba(56,242,179,0.65),
+      0 0 44px rgba(29,140,248,0.45);
   }
   .sivi-sigla span {
     display:inline-block;
-    padding:0 3px;
+    padding:0 4px;
     position:relative;
   }
   .sivi-sigla span::after {
@@ -189,30 +209,30 @@
     width:6px;
     height:6px;
     border-radius:50%;
-    background:#38f2b3;
-    box-shadow:0 0 8px #38f2b3, 0 0 16px #38f2b3;
+    background:#00d2ff;
+    box-shadow:0 0 8px #00d2ff, 0 0 16px #38f2b3;
   }
   .sivi-nome-completo {
     position:relative;
     z-index:2;
     margin-top:14px;
     padding-top:10px;
-    border-top:1px dashed rgba(56,242,179,0.45);
+    border-top:1px dashed rgba(0,210,255,0.48);
     font-size:clamp(13px, 2vw, 16px);
     font-weight:700;
-    letter-spacing:0.08em;
+    letter-spacing:0.09em;
     text-transform:uppercase;
-    color:#9fffe0;
-    text-shadow:0 0 12px rgba(56,242,179,0.45);
+    color:#a6f7ff;
+    text-shadow:0 0 12px rgba(0,210,255,0.55);
   }
 
-  .hero-corpo { display:grid; gap:44px; align-items:center; margin-top:8px; }
+  .hero-corpo { display:grid; gap:44px; align-items:center; margin-top:4px; }
   .hero-arte { order:-1; max-width:320px; margin:0 auto; }
   .hero-arte img {
     width:100%;
     height:auto;
     border-radius:24px;
-    filter:drop-shadow(0 0 24px rgba(56,242,179,0.22)) drop-shadow(0 24px 40px rgba(0,0,0,.4));
+    filter:drop-shadow(0 0 24px rgba(0,210,255,0.22)) drop-shadow(0 24px 40px rgba(0,0,0,.4));
   }
   .sub { font-size:19px; line-height:1.55; color:#d5ece3; max-width:44ch; margin-bottom:28px; }
 
@@ -221,13 +241,13 @@
   .botao {
     display:inline-flex; align-items:center; justify-content:center; gap:10px;
     text-decoration:none; font-weight:700; font-size:17px; padding:15px 28px;
-    border-radius:14px; background:#fff; color:#0a4636;
-    box-shadow:0 8px 22px rgba(0,0,0,.22), 0 0 18px rgba(56,242,179,0.2);
+    border-radius:14px; background:#fff; color:#06282e;
+    box-shadow:0 8px 22px rgba(0,0,0,.22), 0 0 20px rgba(0,210,255,0.28);
     transition:all .2s ease; border:2px solid transparent;
   }
-  .botao:hover { transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.3), 0 0 24px rgba(56,242,179,0.38); background:#fdfdfd; }
-  .botao.alt { background:rgba(255,255,255,0.12); color:#fff; border-color:rgba(56,242,179,0.35); backdrop-filter:blur(6px); }
-  .botao.alt:hover { background:rgba(56,242,179,0.18); color:#fff; }
+  .botao:hover { transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.3), 0 0 26px rgba(56,242,179,0.45); background:#fdfdfd; }
+  .botao.alt { background:rgba(0,210,255,0.12); color:#fff; border-color:rgba(0,210,255,0.4); backdrop-filter:blur(6px); }
+  .botao.alt:hover { background:rgba(0,210,255,0.22); color:#fff; }
   .botao.verde { background:var(--green); color:var(--green-ink); box-shadow:0 8px 24px rgba(13,92,72,0.32); }
   .botao.verde:hover { background:#0a4838; color:#fff; }
   .botao svg { width:20px; height:20px; flex-shrink:0; }
@@ -240,15 +260,16 @@
   .passo3 h3 { margin-bottom:8px; }
   .passo3 p { margin:0; color:var(--muted); font-size:16px; }
 
-  /* Estatísticas & Alerta El Niño */
+  /* Estatísticas & Alerta 2027 */
   .numeros { display:grid; gap:24px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin:32px 0 28px; }
   .numero { background:var(--card-bg); border:1px solid var(--line); border-radius:18px; padding:24px; box-shadow:var(--shadow); }
-  .numero b { display:block; font-size:clamp(36px,5vw,46px); line-height:1.1; color:var(--green); letter-spacing:-.02em; margin-bottom:6px; }
+  .numero b { display:block; font-size:clamp(34px,4.8vw,44px); line-height:1.1; color:var(--green); letter-spacing:-.02em; margin-bottom:6px; }
   .numero span { display:block; color:var(--muted); font-size:16px; line-height:1.45; }
 
-  .nota-alerta { background:var(--tint); border:1px solid var(--line); border-left:6px solid #d97706; border-radius:0 18px 18px 0; padding:22px 26px; margin:28px 0; box-shadow:var(--shadow); }
-  .nota-alerta h3 { color:#b45309; display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:20px; }
-  .nota-alerta p { margin:0; color:var(--ink); font-size:17px; line-height:1.6; }
+  .nota-alerta { background:var(--tint); border:1px solid var(--line); border-left:6px solid #dc2626; border-radius:0 18px 18px 0; padding:22px 26px; margin:28px 0; box-shadow:var(--shadow); }
+  .nota-alerta h3 { color:#dc2626; display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:20px; }
+  .nota-alerta p { margin:0 0 12px; color:var(--ink); font-size:17px; line-height:1.6; }
+  .nota-alerta p:last-child { margin-bottom:0; }
 
   .nota { background:var(--card-bg); border:1px solid var(--line); border-left:6px solid var(--green); border-radius:0 18px 18px 0; padding:22px 26px; margin:28px 0; box-shadow:var(--shadow); }
   .nota p { margin:0; font-size:17px; line-height:1.6; }
@@ -318,6 +339,7 @@
     html { scroll-behavior:auto; }
     .botao, .emblema-topo img { transition:none; }
     .botao:hover, .emblema-topo img:hover { transform:none; }
+    .emblema-box::before { animation:none; }
   }
 </style>
 </head>
@@ -326,18 +348,20 @@
 <header class="hero">
   <div class="wrap">
     <div class="topo">
-      <a class="marca" href="#"><img src="icone-app.png" width="40" height="40" alt="">SIVI · Vigilância SP</a>
+      <a class="marca" href="#"><span class="marca-ponto" aria-hidden="true"></span>SIVI · Vigilância SP</a>
       <nav aria-label="Principal">
-        <a href="#contexto">Super El Niño</a>
+        <a href="#contexto">Alerta 2027</a>
         <a href="#como">Como Funciona</a>
         <a href="#recursos">Recursos</a>
         <a href="#baixar">Baixar APK</a>
       </nav>
     </div>
 
-    <!-- Emblema Centralizado Sem Fundo -->
+    <!-- Novo Emblema Centralizado Sem Fundo -->
     <div class="emblema-topo">
-      <img src="emblema-topo.png" alt="Emblema oficial do SIVI - Sistema Inteligente de Vigilância">
+      <div class="emblema-box">
+        <img src="emblema-sivi-2027.png" alt="Emblema oficial do SIVI - Sistema Inteligente de Vigilância">
+      </div>
     </div>
 
     <div class="hero-corpo">
@@ -347,9 +371,9 @@
           <svg class="chip-circuito" viewBox="0 0 600 140" preserveAspectRatio="none" aria-hidden="true">
             <defs>
               <linearGradient id="siviNeonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#38bdf8" />
+                <stop offset="0%" stop-color="#00d2ff" />
                 <stop offset="50%" stop-color="#38f2b3" />
-                <stop offset="100%" stop-color="#38bdf8" />
+                <stop offset="100%" stop-color="#00d2ff" />
               </linearGradient>
             </defs>
             <path class="chip-trilha" d="M 12 24 H 110 L 136 46 H 225 L 245 24 H 355 L 375 46 H 464 L 490 24 H 588" />
@@ -369,7 +393,7 @@
           <div class="sivi-nome-completo">Sistema Inteligente de Vigilância</div>
         </div>
 
-        <h1>Da resposta tardia à prevenção baseada em dados: proteja seu município.</h1>
+        <h1>Da resposta tardia à prevenção baseada em dados: proteja seu município em 2027.</h1>
         <p class="sub">Plataforma e aplicativo móvel de apoio à vigilância em saúde que transforma o trabalho de campo em mapas de calor, indicadores entomológicos e controle estratégico para evitar epidemias e internações.</p>
         <div class="botoes">
           <a class="botao" href="#recursos">Ver Recursos do SIVI</a>
@@ -385,29 +409,30 @@
 
 <main class="wrap">
 
-  <!-- Seção Alerta Super El Niño e Impacto Orçamentário -->
+  <!-- Seção Alerta MS 2026/2027, El Niño e Impacto Orçamentário -->
   <section id="contexto">
-    <h2>Super El Niño, Explosão de Casos e o Impacto no Orçamento Municipal</h2>
-    <p class="muted" style="max-width:72ch">Fenômenos climáticos extremos como o <strong>Super El Niño</strong> elevam significativamente as temperaturas médias e alteram o regime de chuvas. Para os municípios do estado de São Paulo, isso representa um cenário crítico:</p>
+    <h2>Alerta 2026/2027: Ministério da Saúde, El Niño e Risco de Explosão de Casos</h2>
+    <p class="muted" style="max-width:74ch">O Ministério da Saúde emitiu alerta (Nota Informativa nº 10/2026) sobre a possibilidade de aumento de arboviroses no período 2026/2027 devido ao El Niño, com risco de agravamento nos primeiros meses de 2027. Projeções científicas e cenários climáticos reforçam o sinal de atenção para os municípios:</p>
 
     <div class="numeros">
       <div class="numero">
-        <b>6,48 mi</b>
-        <span>casos prováveis de dengue no Brasil em 2024, comparados a 1,65 milhão em 2023.</span>
+        <b>866 mil</b>
+        <span>casos prováveis projetados na temporada 2026-27 (faixa de 569 mil a 1,6 mi; projeções anteriores chegaram a 1,7 mi).</span>
       </div>
       <div class="numero">
-        <b>+303%</b>
-        <span>de explosão nos registros nacionais impulsionada pelas mudanças térmicas e climáticas.</span>
+        <b>~50%</b>
+        <span>dos municípios em alerta ou risco para o <em>Aedes aegypti</em> — queda recente não elimina o perigo.</span>
       </div>
       <div class="numero">
-        <b>R$ Alto</b>
-        <span>custo financeiro e operacional com internações hospitalares e prontos-socorros lotados.</span>
+        <b>2x a 3x</b>
+        <span>potencial de alta em modelos climáticos no Sudeste (incluindo SP) sob El Niño e calor/umidade.</span>
       </div>
     </div>
 
     <div class="nota-alerta">
-      <h3>⚠️ O Risco Real para o Tesouro Municipal</h3>
-      <p>Quando a gestão municipal atua de forma reativa, o custo financeiro é devastador. Surtos descontrolados geram filas intermináveis nos postos de saúde, superlotação de leitos de internação, pagamento de horas extras emergenciais, aluguel de tendas de hidratação e aquisição emergencial de insumos com preços inflacionados. <strong>A prevenção ativa e direcionada por inteligência territorial é a única forma comprovada de evitar gastos milionários com internações e salvar vidas.</strong></p>
+      <h3>🚨 Cenário Crítico para 2027: Por Que Não Podemos Baixar a Guarda</h3>
+      <p>A queda de casos observada em relação ao pico anterior não deve gerar uma <strong>falsa sensação de segurança</strong>. O <strong>Ministério da Saúde</strong> alerta para o impacto do <strong>El Niño</strong> no período 2026/2027, o calor e a umidade no Sudeste favorecem a reprodução do <em>Aedes aegypti</em>, e a circulação de sorotipos como <strong>DENV-3</strong> e <strong>DENV-4</strong> eleva o risco de surtos expressivos em populações vulneráveis.</p>
+      <p>Quando o município espera o surto explodir para reagir, o impacto atinge em cheio a rede de saúde e o orçamento público: prontos-socorros sobrecarregados, internações hospitalares, horas extras de emergência e compras emergenciais. <strong>Mapear focos, monitorar bairros críticos e agir antes do pico de 2027 é decisivo para conter internações e proteger o tesouro municipal.</strong></p>
     </div>
   </section>
 
@@ -693,8 +718,8 @@
   </section>
 
   <footer>
-    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
-      <img src="icone-app.png" width="36" height="36" alt="" style="border-radius:8px;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+      <span class="marca-ponto" aria-hidden="true"></span>
       <strong>SIVI – Sistema Inteligente de Vigilância</strong>
     </div>
     <p style="margin:0; max-width:700px;">A tecnologia apoia, sem substituir, a atuação profissional, a investigação epidemiológica e a decisão soberana da autoridade sanitária municipal.</p>

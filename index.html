@@ -66,8 +66,8 @@
   .hero {
     position:relative;
     background:
-      radial-gradient(circle at 50% 22%, rgba(0,210,255,0.22), transparent 48%),
-      radial-gradient(circle at 50% 38%, rgba(56,242,179,0.16), transparent 56%),
+      radial-gradient(circle at 50% 22%, rgba(0,210,255,0.24), transparent 48%),
+      radial-gradient(circle at 50% 38%, rgba(56,242,179,0.18), transparent 56%),
       linear-gradient(rgba(0,210,255,0.06) 1px, transparent 1px),
       linear-gradient(90deg, rgba(56,242,179,0.06) 1px, transparent 1px),
       linear-gradient(160deg,#03121a 0%,#06282e 48%,#0a4a3c 100%);
@@ -101,7 +101,7 @@
   .topo nav { display:none; gap:26px; font-size:16px; }
   @media (min-width:768px) { .topo nav { display:flex; } }
 
-  /* Emblema Centralizado Harmônico e Interativo */
+  /* Novo Emblema S.I.V.I Centralizado e Harmônico */
   .emblema-topo {
     display:flex;
     flex-direction:column;
@@ -112,7 +112,7 @@
   }
   .emblema-moldura {
     position:relative;
-    width:clamp(220px, 34vw, 290px);
+    width:clamp(240px, 36vw, 320px);
     aspect-ratio:1 / 1;
     display:grid;
     place-items:center;
@@ -122,35 +122,35 @@
   .emblema-moldura::before {
     content:"";
     position:absolute;
-    inset:12%;
+    inset:14%;
     border-radius:50%;
-    background:radial-gradient(circle, rgba(0,210,255,0.28) 0%, rgba(56,242,179,0.14) 55%, transparent 78%);
+    background:radial-gradient(circle, rgba(0,210,255,0.34) 0%, rgba(56,242,179,0.2) 55%, transparent 78%);
     filter:blur(22px);
     z-index:-1;
     transition:opacity .4s ease, transform .4s ease, background .4s ease;
   }
   .emblema-moldura.aceso::before,
   .emblema-moldura:hover::before {
-    background:radial-gradient(circle, rgba(0,210,255,0.65) 0%, rgba(56,242,179,0.42) 55%, transparent 78%);
+    background:radial-gradient(circle, rgba(0,210,255,0.68) 0%, rgba(56,242,179,0.46) 55%, transparent 78%);
     transform:scale(1.14);
   }
   .emblema-moldura img {
     width:100%;
     height:100%;
     object-fit:contain;
-    transform:scale(1.36);
     background:transparent;
-    -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 54%, rgba(0,0,0,0.72) 66%, transparent 77%);
-            mask-image:radial-gradient(circle at 50% 50%, #000 54%, rgba(0,0,0,0.72) 66%, transparent 77%);
-    filter:contrast(1.06) saturate(1.06) brightness(0.96) drop-shadow(0 0 12px rgba(0,210,255,0.3));
+    mix-blend-mode:multiply;
+    -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 92%);
+            mask-image:radial-gradient(circle at 50% 50%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 92%);
+    filter:contrast(1.1) saturate(1.15) drop-shadow(0 0 14px rgba(0,210,255,0.38));
     transition:transform .4s ease, filter .4s ease;
   }
   .emblema-moldura.aceso img,
   .emblema-moldura:hover img {
-    transform:scale(1.42);
-    filter:contrast(1.16) saturate(1.28) brightness(1.14)
-           drop-shadow(0 0 14px rgba(0,210,255,0.85))
-           drop-shadow(0 0 32px rgba(56,242,179,0.75));
+    transform:scale(1.05);
+    filter:contrast(1.18) saturate(1.32) brightness(1.1)
+           drop-shadow(0 0 16px rgba(0,210,255,0.88))
+           drop-shadow(0 0 32px rgba(56,242,179,0.72));
   }
 
   /* Conteúdo Centralizado do Hero */
@@ -427,7 +427,7 @@
   @media (prefers-reduced-motion:reduce) {
     html { scroll-behavior:auto; }
     .botao, .emblema-moldura img, .chip-trilha { transition:none; }
-    .botao:hover, .emblema-moldura:hover img { transform:scale(1.36); }
+    .botao:hover, .emblema-moldura:hover img { transform:scale(1.05); }
     .chip-pulso { animation:none; }
   }
 </style>
@@ -446,10 +446,10 @@
       </nav>
     </div>
 
-    <!-- Emblema Centralizado Harmônico e Interativo -->
+    <!-- Novo Logo S.I.V.I Centralizado e Interativo -->
     <div class="emblema-topo">
       <div class="emblema-moldura" id="emblema-interativo">
-        <img src="emblema-sivi.png" alt="Emblema do SIVI - Sistema Inteligente de Vigilância">
+        <img src="emblema-sivi.png" alt="Logo do aplicativo SIVI - Sistema Inteligente de Vigilância">
       </div>
     </div>
 
@@ -464,17 +464,14 @@
               <stop offset="100%" stop-color="#00d2ff" />
             </linearGradient>
           </defs>
-          <!-- Trilhas apagadas de fundo -->
           <path class="chip-trilha-base" d="M 12 24 H 110 L 136 46 H 225 L 245 24 H 355 L 375 46 H 464 L 490 24 H 588" />
           <path class="chip-trilha-base" d="M 24 114 H 145 L 172 92 H 428 L 455 114 H 576" />
           <path class="chip-trilha-base" d="M 185 46 V 92 M 300 24 V 92 M 415 46 V 92" />
 
-          <!-- Trilhas que se acendem no hover / rolagem -->
           <path class="chip-trilha" d="M 12 24 H 110 L 136 46 H 225 L 245 24 H 355 L 375 46 H 464 L 490 24 H 588" />
           <path class="chip-trilha" d="M 24 114 H 145 L 172 92 H 428 L 455 114 H 576" />
           <path class="chip-trilha" d="M 185 46 V 92 M 300 24 V 92 M 415 46 V 92" />
 
-          <!-- Pulso luminoso percorrendo os circuitos -->
           <path class="chip-pulso" d="M 12 24 H 110 L 136 46 H 225 L 245 24 H 355 L 375 46 H 464 L 490 24 H 588" />
           <path class="chip-pulso" d="M 24 114 H 145 L 172 92 H 428 L 455 114 H 576" />
 
@@ -867,13 +864,11 @@
       a.addEventListener("click", abrirModal);
     });
 
-    // Interatividade das conexões de chip no hover (PC) e rolagem (Celular/Mobile)
     var emblema = document.getElementById("emblema-interativo");
     var chipBox = document.getElementById("sivi-chip-box");
     var scrollTimer = null;
 
     if (emblema && chipBox) {
-      // Sincroniza brilho entre emblema e conexões ao passar o mouse
       emblema.addEventListener("mouseenter", function () {
         chipBox.classList.add("aceso");
       });
@@ -888,7 +883,6 @@
         if (window.scrollY <= 12) emblema.classList.remove("aceso");
       });
 
-      // Acende progressivamente ao rolar a tela no celular ou computador
       function atualizarConexoesScroll() {
         var y = window.scrollY || window.pageYOffset || 0;
         var limite = 220;

@@ -52,7 +52,7 @@
     color:var(--ink);
     font:18px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
-  a:focus-visible, summary:focus-visible, button:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+  a:focus-visible, summary:focus-visible, button:focus-visible, video:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
   img { max-width:100%; height:auto; display:block; }
   .wrap { max-width:1060px; margin:0 auto; padding:0 24px; }
   h1 { font-size:clamp(30px, 5vw, 48px); line-height:1.12; margin:0 0 18px; letter-spacing:-.02em; }
@@ -98,7 +98,7 @@
     box-shadow:0 0 10px #38f2b3, 0 0 20px #00d2ff;
     display:inline-block;
   }
-  .topo nav { display:none; gap:26px; font-size:16px; }
+  .topo nav { display:none; gap:24px; font-size:16px; }
   @media (min-width:768px) { .topo nav { display:flex; } }
 
   /* Emblema S.I.V.I Centralizado e Harmônico */
@@ -344,6 +344,31 @@
   .botao svg { width:20px; height:20px; flex-shrink:0; }
   [hidden] { display:none !important; }
 
+  /* Player de Vídeo de Apresentação */
+  .video-card {
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:20px;
+    margin-top:24px;
+    box-shadow:var(--shadow);
+  }
+  .video-moldura {
+    position:relative;
+    width:100%;
+    aspect-ratio:16 / 9;
+    border-radius:16px;
+    overflow:hidden;
+    background:#041418;
+    box-shadow:0 16px 36px rgba(0,0,0,0.28);
+  }
+  .video-moldura video {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
   /* Cards e Grid */
   .passos3 { display:grid; gap:24px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:32px; counter-reset:n; }
   .passo3 { counter-increment:n; background:var(--card-bg); border:1px solid var(--line); border-radius:20px; padding:28px 26px; box-shadow:var(--shadow); }
@@ -439,6 +464,7 @@
     <div class="topo">
       <a class="marca" href="#"><span class="marca-ponto" aria-hidden="true"></span>SIVI · Vigilância SP</a>
       <nav aria-label="Principal">
+        <a href="#video-apresentacao">Vídeo</a>
         <a href="#contexto">Alerta 2027</a>
         <a href="#como">Como Funciona</a>
         <a href="#recursos">Recursos</a>
@@ -492,7 +518,7 @@
       <h1>Da resposta tardia à prevenção baseada em dados: proteja seu município em 2027.</h1>
       <p class="sub">Plataforma e aplicativo móvel de apoio à vigilância em saúde que transforma o trabalho de campo em mapas de calor, indicadores entomológicos e controle estratégico para evitar epidemias e internações.</p>
       <div class="botoes">
-        <a class="botao" href="#recursos">Ver Recursos do SIVI</a>
+        <a class="botao" href="#video-apresentacao">Assistir Apresentação</a>
         <a class="botao alt js-contato" href="#" hidden>Solicitar Apresentação</a>
       </div>
     </div>
@@ -500,6 +526,20 @@
 </header>
 
 <main class="wrap">
+
+  <!-- Seção Vídeo de Apresentação do S.I.V.I -->
+  <section id="video-apresentacao">
+    <h2>Veja o S.I.V.I em ação no território</h2>
+    <p class="muted" style="max-width:68ch">Entenda o cenário de alerta para 2027 e como o georreferenciamento de focos, o monitoramento de casos por bairro e o controle de vistorias apoiam a gestão municipal.</p>
+    <div class="video-card">
+      <div class="video-moldura">
+        <video controls preload="metadata" playsinline poster="tela-inicial.jpg">
+          <source src="video_1.mp4" type="video/mp4">
+          Seu navegador não suporta a reprodução de vídeo HTML5.
+        </video>
+      </div>
+    </div>
+  </section>
 
   <!-- Seção Alerta 2026/2027, El Niño e Impacto Orçamentário -->
   <section id="contexto">
@@ -742,175 +782,4 @@
       </div>
       <div class="ganho-card">
         <h3>Economia Orçamentária</h3>
-        <p>Protege o tesouro municipal contra gastos emergenciais imprevistos com surtos e epidemias.</p>
-      </div>
-      <div class="ganho-card">
-        <h3>Eficiência Operacional</h3>
-        <p>Equipes de endemias alocadas exatamente onde há maior densidade de risco no território.</p>
-      </div>
-      <div class="ganho-card">
-        <h3>Transparência e Auditoria</h3>
-        <p>Indicadores confiáveis para relatórios de gestão, conselhos de saúde e tribunais de contas.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Para onde o app caminha -->
-  <section id="futuro">
-    <h2>Evolução Contínua da Plataforma</h2>
-    <p class="muted" style="max-width:62ch">Perspectivas de aprimoramento tecnológico alinhadas às diretrizes da saúde pública.</p>
-    <ul class="futuro">
-      <li><b>Séries Históricas Avançadas</b>Tendências sazonais comparadas por bairro, ciclo e período climático.</li>
-      <li><b>Indicadores Entomológicos Integrados</b>Leitura cruzada entre focos, armadilhas e casos confirmados.</li>
-      <li><b>Otimização de Rotas de Campo</b>Distribuição inteligente de equipes baseada em geoprocessamento.</li>
-      <li><b>Relatórios Executivos Automatizados</b>Consolidação ágil para prestação de contas e reuniões técnicas.</li>
-    </ul>
-    <div class="nota" style="margin-top:28px">
-      <p>A tecnologia atua como apoio indispensável, respeitando sempre a autonomia técnica e a decisão soberana da autoridade sanitária municipal.</p>
-    </div>
-  </section>
-
-  <!-- Contato e Apresentação -->
-  <section id="contato">
-    <div class="autor">
-      <div style="flex:1 1 300px">
-        <h2 style="font-size:26px">Desenvolvido por Gustavo Leite</h2>
-        <p class="muted">Sanitarista, Tecnólogo em Agente Comunitário de Saúde e Endemias, e Técnico em Vigilância em Saúde.</p>
-      </div>
-      <a class="botao verde js-contato" href="#" hidden>Solicitar Apresentação para o Município</a>
-    </div>
-  </section>
-
-  <!-- Baixar APK (Botão inativo: Disponível em breve) -->
-  <section id="baixar">
-    <div class="app-grid">
-      <div>
-        <h2>Baixe ou atualize o SIVI</h2>
-        <p class="muted">Disponível para dispositivos Android. O sistema avisa automaticamente quando uma nova versão é publicada.</p>
-        <div class="botoes">
-          <a class="botao verde" href="#" style="background:var(--muted); opacity:0.65; cursor:not-allowed; box-shadow:none;" onclick="event.preventDefault(); alert('O aplicativo SIVI estará disponível para download público em breve.');" aria-disabled="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>Baixar APK
-          </a>
-        </div>
-        <span class="pilula" style="background:#fef3c7; color:#b45309; border-color:#f59e0b;">Disponível em breve · Android</span>
-      </div>
-      <div>
-        <ol class="passos">
-          <li>Toque em <strong>Baixar APK</strong> e aguarde o término do download.</li>
-          <li>Abra o arquivo <strong>SIVI.apk</strong> na barra de notificações ou pasta de Downloads.</li>
-          <li>Se o Android solicitar confirmação de segurança, toque em <strong>Configurações</strong> e ative <strong>Permitir desta fonte</strong>.</li>
-          <li>Toque em <strong>Instalar</strong> e em seguida em <strong>Abrir</strong>.</li>
-        </ol>
-        <details>
-          <summary>Apareceu um aviso de segurança do Android?</summary>
-          <p>É um procedimento padrão para apps instalados fora da Google Play Store. Toque em "Mais detalhes" e em "Instalar mesmo assim". O aplicativo é seguro e auditado.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-      <span class="marca-ponto" aria-hidden="true"></span>
-      <strong>SIVI – Sistema Inteligente de Vigilância</strong>
-    </div>
-    <p style="margin:0; max-width:700px;">A tecnologia apoia, sem substituir, a atuação profissional, a investigação epidemiológica e a decisão soberana da autoridade sanitária municipal.</p>
-  </footer>
-</main>
-
-<!-- Modal de Solicitação de Apresentação / Cópia de E-mail -->
-<div id="modal-contato" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px);">
-  <div style="background:var(--card-bg); border:1px solid var(--line); border-radius:24px; padding:32px; max-width:440px; width:100%; box-shadow:0 24px 48px rgba(0,0,0,0.3); text-align:center; position:relative;">
-    <h3 style="font-size:24px; margin-bottom:12px; color:var(--green);">Solicitar Apresentação</h3>
-    <p class="muted" style="margin-bottom:24px; font-size:16px;">Entre em contato com o desenvolvedor para levar o SIVI ao seu município:</p>
-    <div style="background:var(--tint); border:1px solid var(--line); border-radius:12px; padding:14px; font-size:18px; font-weight:700; margin-bottom:24px; user-select:all; color:var(--ink);">
-      gusleite99@gmail.com
-    </div>
-    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <button type="button" onclick="copiarEmail()" class="botao verde" style="cursor:pointer; border:none;">Copiar E-mail</button>
-      <button type="button" onclick="fecharModal()" class="botao alt" style="background:var(--tint); color:var(--ink); border:1px solid var(--line); cursor:pointer;">Fechar</button>
-    </div>
-    <div id="msg-copiado" style="margin-top:12px; font-size:14px; color:var(--green); font-weight:700; opacity:0; transition:opacity 0.2s;">E-mail copiado para a área de transferência!</div>
-  </div>
-</div>
-
-<script>
-  var EMAIL_CONTATO = "gusleite99@gmail.com";
-
-  function abrirModal(e) {
-    e.preventDefault();
-    document.getElementById("modal-contato").style.display = "flex";
-  }
-
-  function fecharModal() {
-    document.getElementById("modal-contato").style.display = "none";
-    document.getElementById("msg-copiado").style.opacity = "0";
-  }
-
-  function copiarEmail() {
-    navigator.clipboard.writeText(EMAIL_CONTATO).then(function() {
-      var msg = document.getElementById("msg-copiado");
-      msg.style.opacity = "1";
-      setTimeout(function() {
-        msg.style.opacity = "0";
-      }, 3000);
-    });
-  }
-
-  (function () {
-    document.querySelectorAll(".js-contato").forEach(function (a) {
-      a.href = "#";
-      a.hidden = false;
-      a.addEventListener("click", abrirModal);
-    });
-
-    var emblema = document.getElementById("emblema-interativo");
-    var chipBox = document.getElementById("sivi-chip-box");
-    var scrollTimer = null;
-
-    if (emblema && chipBox) {
-      emblema.addEventListener("mouseenter", function () {
-        chipBox.classList.add("aceso");
-      });
-      emblema.addEventListener("mouseleave", function () {
-        if (window.scrollY <= 12) chipBox.classList.remove("aceso");
-      });
-
-      chipBox.addEventListener("mouseenter", function () {
-        emblema.classList.add("aceso");
-      });
-      chipBox.addEventListener("mouseleave", function () {
-        if (window.scrollY <= 12) emblema.classList.remove("aceso");
-      });
-
-      function atualizarConexoesScroll() {
-        var y = window.scrollY || window.pageYOffset || 0;
-        var limite = 220;
-        var fator = Math.min(1, Math.max(0, y / limite));
-        var offset = Math.round(620 * (1 - fator));
-
-        chipBox.style.setProperty("--progresso-trilha", offset);
-
-        if (y > 12) {
-          chipBox.classList.add("aceso");
-          emblema.classList.add("aceso");
-          clearTimeout(scrollTimer);
-          scrollTimer = setTimeout(function () {
-            if ((window.scrollY || 0) <= 12) {
-              chipBox.classList.remove("aceso");
-              emblema.classList.remove("aceso");
-            }
-          }, 900);
-        } else {
-          chipBox.classList.remove("aceso");
-          emblema.classList.remove("aceso");
-        }
-      }
-
-      window.addEventListener("scroll", atualizarConexoesScroll, { passive: true });
-      atualizarConexoesScroll();
-    }
-  })();
-</script>
-</body>
-</html>
+        <p>Protege o tesouro
